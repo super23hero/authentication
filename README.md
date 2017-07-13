@@ -4,7 +4,7 @@ Sistema para ajudar na doação para crianças no Natal
 # Stack
 
 ## Backend
-- Laravel
+- Express
 
 ## Frontend
 - Vue.js
@@ -13,11 +13,35 @@ Sistema para ajudar na doação para crianças no Natal
 ## Banco de Dados
 - Mysql
 
+### Setup
+```bash
+$ npm install yarn -g
+$ yarn install
+```
+### Environment
+* Basta criar um arquivo .env baseado no .env.example
 
-## Ambiente de desenvolvimento
-O ambiente de desenvolvimento utilizado é o Homestead do Laravel, pois com ele temos todas as dependências necessárias. Não é necessário utilizar o Laravel Homestead para o desenvolvimento do site, mas é recomendado pela facildiade e padronização no desenvolvimento.
+* NODE_ENV
+  - Node environment, defaults to `development`
+* PORT
+  - Http server port, defaults to `3000`
+* HTTP_LOG_CONFIG
+  - [morgan log configuration](https://github.com/expressjs/morgan#predefined-formats), defaults to `dev`
 
-Para utilizar a ferramentas são necessárias alguns passos e instalações, que podem ser vistas em:
-https://laravel.com/docs/5.4/homestead
+### Usage
+Start:
+```bash
+$ yarn start
+```
+Test:
+```bash
+$ yarn test
+```
+Coverage:
+```bash
+$ yarn run coverage
+```
 
-Após instalado o ambiente de desenvolvimento você deve clonar nossa aplicação na pasta externa do Homestead.
+### License
+
+[Licence](https://github.com/rodrigogs/express-seed/blob/master/LICENSE) © Rodrigo Gomes da Silva
