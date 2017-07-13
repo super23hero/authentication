@@ -1,5 +1,6 @@
 const debug = require('debug')('app:routes:index');
 const express = require('express');
+const passport = require('passport');
 
 debug('configuring routes');
 
@@ -11,6 +12,12 @@ const router = express.Router();
 
 // Healthy check
 router.get('/', HealthyCheckController.index);
+
+router.post('/profile', passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    res.send(req.user.profile);
+  },
+);
 
 // API versions
 router.use('/v1', v1);
