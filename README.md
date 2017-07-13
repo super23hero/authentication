@@ -27,6 +27,12 @@ $ yarn install
   - Http server port, defaults to `3000`
 * HTTP_LOG_CONFIG
   - [morgan log configuration](https://github.com/expressjs/morgan#predefined-formats), defaults to `dev`
+* DATABASE
+  - `mongodb://` URL
+* SECRET
+  Application Secret
+* KEY
+  Application Key
 
 ### Usage
 Start:
