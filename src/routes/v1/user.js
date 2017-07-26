@@ -19,7 +19,4 @@ router.route('/:id')
   .put(UserController.update)
   .delete(UserController.delete);
 
-router.route('/:id/environments')
-  .get(UserController.environments);
-
 module.exports = router;

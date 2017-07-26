@@ -182,35 +182,6 @@ const UserController = {
       next(err);
     }
   },
-
-  /**
-   * @api {delete} /v1/user/:id/environments Get user environments
-   * @apiVersion 1.0.0
-   * @apiName GetUserEnvironments
-   * @apiGroup User
-   * @apiPermission user
-   *
-   * @apiDescription Get user environments.
-   *
-   * @apiParam {String} id User id.
-   *
-   * @apiExample Example usage:
-   * curl -X GET http://localhost:3000/v1/user/12345/environments
-   */
-  environments: async (req, res, next) => {
-    debug('delete action');
-
-    const { params } = req;
-
-    try {
-      UserService.validateUserSession(req, params.id);
-      const user = await UserService.findById(params.id);
-      const environments = await user.populate('environments').execPopulate();
-      res.status(200).send(environments);
-    } catch (err) {
-      next(err);
-    }
-  },
 };
 
 module.exports = UserController;
