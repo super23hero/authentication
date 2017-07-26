@@ -1,5 +1,3 @@
-require('./config/mongoose');
-
 const debug = require('debug')('app');
 const express = require('express');
 const morgan = require('morgan');
@@ -7,11 +5,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
-const passport = require('passport');
-const promisify = require('es6-promisify');
 const helmet = require('helmet');
 const cors = require('cors');
-require('./handlers/passport');
 
 debug('bootstrapping application');
 
@@ -21,9 +16,9 @@ const routes = require('./routes');
 
 const app = express();
 
+app.use(morgan(config.env.HTTP_LOG_CONFIG, { stream: logger.stream }));
 app.use(helmet());
 app.use(cors());
-app.use(morgan(config.env.HTTP_LOG_CONFIG, { stream: logger.stream }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -37,15 +32,12 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
 
-// // Passport JS is what we use to handle our logins
-app.use(passport.initialize());
-
-// promisify some callback based APIs
-app.use((req, res, next) => {
-  req.login = promisify(req.login, req);
-  next();
-});
+// Passport JS is what we use to handle our logins
+app.use(config.passport.initialize());
 
 app.use(routes);
+
+config.mongoose.connection.on('connected', () => app.emit('ready'));
+config.mongoose.connection.on('error', err => app.emit('error', err));
 
 module.exports = app;

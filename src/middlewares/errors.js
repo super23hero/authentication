@@ -2,14 +2,14 @@ const debug = require('debug')('app:middlewares:errors');
 const env = require('../config/env');
 const logger = require('../config/logger');
 
+const NotFoundError = require('../errors/notFound');
+
 const ErrorHandlerMiddleware = {
 
   notFound: (req, res, next) => {
     debug('route not found');
 
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+    next(new NotFoundError());
   },
 
   generic: (err, req, res, next) => {
@@ -19,9 +19,13 @@ const ErrorHandlerMiddleware = {
     if (env.NODE_ENV !== 'development') delete err.stack;
     logger.error(err);
 
+    if (err.name === 'ValidationError' && err.errors) {
+      err.message = err.toString();
+    }
+
     res
       .status(err.status || 500)
-      .send(err);
+      .send({ error: err.message });
   },
 
 };

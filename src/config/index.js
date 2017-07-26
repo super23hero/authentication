@@ -7,4 +7,6 @@ require('./promise');
 module.exports = {
   env: require('./env'),
   logger: require('./logger'),
+  passport: require('./passport'),
+  mongoose: require('./mongoose'),
 };
