@@ -9,7 +9,6 @@ mongoose.Promise = global.Promise;
 const md5 = require('md5');
 const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
-const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new Schema({
   email: {
@@ -80,7 +79,6 @@ UserSchema.methods.comparePassword = function comparePassword(candidatePassword)
 };
 
 UserSchema.plugin(beautifyUnique);
-UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 UserSchema.plugin(mongodbErrorHandler);
 
 const User = mongoose.model('User', UserSchema);
