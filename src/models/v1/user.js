@@ -1,40 +1,39 @@
 const mongoose = require('mongoose');
 const beautifyUnique = require('mongoose-beautiful-unique-validation');
-const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 const Schema = mongoose.Schema;
-const SALT_COMPLEXITY = 10;
-mongoose.Promise = global.Promise;
-
-const md5 = require('md5');
-const validator = require('validator');
-const mongodbErrorHandler = require('mongoose-mongodb-errors');
+const ObjectId = Schema.Types.ObjectId;
 
 const UserSchema = new Schema({
-  email: {
-    type: String,
-    unique: 'Given email is already in use',
-    lowercase: true,
-    trim: true,
-    validate: [validator.isEmail, 'Invalid Email Address'],
-    required: 'Please Supply an email address',
-  },
   name: {
     type: String,
-    required: 'Please supply a name',
     trim: true,
+    required: [true, 'User [name] field is required'],
   },
-  password: {
+  username: {
+    type: String,
+    trim: true,
+    required: [true, 'User [username] field is required'],
+    unique: 'Given username is already in use',
+  },
+  hashed_password: {
     type: String,
     required: [true, 'User [password] field is required'],
   },
-  resetPasswordToken: String,
-  resetPasswordExpires: Date,
+  salt: {
+    type: String,
+    required: true,
+  },
   isAdmin: {
     type: Boolean,
     required: true,
     default: false,
   },
+  environments: [{
+    type: ObjectId,
+    ref: 'Environment',
+  }],
   creation_date: {
     type: Date,
     default: new Date(),
@@ -46,21 +45,17 @@ UserSchema.virtual('gravatar').get(function () {
   return `https://gravatar.com/avatar/${hash}?s=200`;
 });
 
-UserSchema.pre('save', function preSave(next) {
-  const user = this;
-  if (!user.isModified) return next();
+UserSchema.virtual('password')
+  .set(function set(password) {
+    this._plain_password = password;
+    this.salt = crypto.randomBytes(128).toString('base64');
+    this.hashed_password = this.encryptPassword(password);
+  })
+  .get(function get() { return this._plain_password; });
 
-  bcrypt.genSalt(SALT_COMPLEXITY, (err, salt) => {
-    if (err) return next(err);
-
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) return next();
-
-      user.password = hash;
-      next();
-    });
-  });
-});
+UserSchema.methods.encryptPassword = function encryptPassword(password) {
+  return crypto.pbkdf2Sync(password, this.salt, 100000, 512, 'sha512').toString('hex');
+};
 
 UserSchema.post('validate', (doc) => {
   if (doc.isNew) {
@@ -69,17 +64,10 @@ UserSchema.post('validate', (doc) => {
 });
 
 UserSchema.methods.comparePassword = function comparePassword(candidatePassword) {
-  const user = this;
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(candidatePassword, user.password, (err, isMatch) => {
-      if (err) return reject(err);
-      resolve(isMatch);
-    });
-  });
+  return this.encryptPassword(candidatePassword) === this.hashed_password;
 };
 
 UserSchema.plugin(beautifyUnique);
-UserSchema.plugin(mongodbErrorHandler);
 
 const User = mongoose.model('User', UserSchema);
 

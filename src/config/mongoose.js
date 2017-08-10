@@ -26,7 +26,7 @@ mongoose.connection.once('open', async () => {
   if (count > 0) return;
   debug('creating "admin" user since there\'s no users in the database');
 
-  new User({ name: 'Administrator', email: 'daniel.kuroski@gmail.com', password: 'admin', isAdmin: true }).save();
+  new User({ name: 'Administrator', email: 'daniel.kuroski@gmail.com', username: 'involves', password: 'admin', isAdmin: true }).save();
 });
 
 process.on('SIGINT', () => {
