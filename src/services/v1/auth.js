@@ -8,14 +8,14 @@ const AuthService = {
 
   /**
    *
-   * @param {String} email
+   * @param {String} username
    * @param {String} password
    * @return {Promise.<*>}
    */
-  login: async (email, password) => {
-    debug(`user "${email}" logging in`);
+  login: async (username, password) => {
+    debug(`user "${username}" logging in`);
 
-    const user = await UserService.findOne({ email });
+    const user = await UserService.findOne({ username });
     if (!user) throw new UnauthorizedError();
     const validPassword = await user.comparePassword(password);
     if (!validPassword) throw new UnauthorizedError();

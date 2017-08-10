@@ -15,7 +15,6 @@
     "coverage": "nyc --reporter=html npm test"
   },
   "dependencies": {
-    "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "body-parser": "~1.17.2",
     "connect-mongo": "^1.3.2",
