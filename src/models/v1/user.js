@@ -3,7 +3,6 @@ const beautifyUnique = require('mongoose-beautiful-unique-validation');
 const crypto = require('crypto');
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.Types.ObjectId;
 
 const UserSchema = new Schema({
   name: {
@@ -30,19 +29,10 @@ const UserSchema = new Schema({
     required: true,
     default: false,
   },
-  environments: [{
-    type: ObjectId,
-    ref: 'Environment',
-  }],
   creation_date: {
     type: Date,
     default: new Date(),
   },
-});
-
-UserSchema.virtual('gravatar').get(function () {
-  const hash = md5(this.email);
-  return `https://gravatar.com/avatar/${hash}?s=200`;
 });
 
 UserSchema.virtual('password')
