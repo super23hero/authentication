@@ -11,8 +11,9 @@
   "scripts": {
     "start": "dotenv nodemon ./bin/www",
     "eslint": "eslint . --ext .js",
-    "test": "mocha --ui tdd test/**/*.js",
-    "coverage": "nyc --reporter=html npm test"
+    "test": "cross-env NODE_ENV=test mocha --ui tdd -t 5000 test/**/*.spec.js",
+    "coverage": "cross-env NODE_ENV=test nyc --reporter=html --reporter=lcov npm test",
+    "docs": "apidoc -i src/controllers -o doc/"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
@@ -45,13 +46,18 @@
     "winston-daily-rotate-file": "^1.4.6"
   },
   "devDependencies": {
+    "@glimpse/glimpse": "^0.22.15",
+    "apidoc": "^0.17.6",
     "assert": "^1.4.1",
+    "chai": "^4.1.1",
+    "codeclimate-test-reporter": "^0.5.0",
     "dotenv-cli": "^1.4.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
-    "nyc": "^10.3.2"
+    "nyc": "^10.3.2",
+    "supertest": "^3.0.0"
   }
 }

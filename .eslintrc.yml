@@ -11,8 +11,12 @@ rules:
   no-underscore-dangle: off
   import/extensions: off
   no-bitwise: off
+  no-unused-expressions: off
 globals:
+  process: on
   describe: on
+  before: on
+  beforeEach: on
   suite: on
   test: on
   it: on

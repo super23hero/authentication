@@ -17,6 +17,7 @@ const AuthService = {
 
     const user = await UserService.findOne({ username });
     if (!user) throw new UnauthorizedError();
+
     const validPassword = await user.comparePassword(password);
     if (!validPassword) throw new UnauthorizedError();
 

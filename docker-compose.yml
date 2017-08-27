@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  cenv-registry:
+    depends_on:
+      - mongo
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: node_modules/.bin/nodemon bin/www
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      HTTP_LOG_CONFIG: dev
+      MONGO_DB: mongodb://mongo:27017/adote
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+
+  mongo:
+    image: mongo:3.4
+    command: mongod

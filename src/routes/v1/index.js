@@ -5,12 +5,9 @@ debug('configuring routes');
 
 const router = express.Router();
 
-const auth = require('./auth');
-const user = require('./user');
-const example = require('./example');
+const getRoute = name => require(`./${name}`);
 
-router.use('/auth', auth);
-router.use('/user', user);
-router.use('/example', example);
+router.use('/auth', getRoute('auth'));
+router.use('/user', getRoute('user'));
 
 module.exports = router;

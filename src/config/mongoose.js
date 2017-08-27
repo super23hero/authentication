@@ -10,7 +10,7 @@ debug(`configuring mongoose connection to ${url}`);
 
 mongoose.set('debug', env.NODE_ENV !== 'production');
 
-mongoose.connect(url, { server: { reconnectTries: Number.MAX_VALUE } });
+mongoose.connect(url, { server: { reconnectTries: Number.MAX_VALUE, useMongoClient: true } });
 
 mongoose.Promise = Promise;
 

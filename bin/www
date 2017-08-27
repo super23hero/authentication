@@ -70,6 +70,13 @@ function onListening() {
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+app.on('ready', () => {
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+});
+
+app.on('error', (err) => {
+  logger.error('Application failed to start!', err);
+  process.exit(0);
+});

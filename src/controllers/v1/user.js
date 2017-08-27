@@ -54,14 +54,12 @@ const UserController = {
    * @apiParam    {String}    username      User username.
    * @apiParam    {String}    password      User password.
    * @apiParam    {Boolean}   isAdmin       User is admin.
-   * @apiParam    {String[]}  environments  User environments.
    *
    * @apiSuccess  {String}  _id             User id.
    * @apiSuccess  {String}  name            User name.
    * @apiSuccess  {String}  username        User username.
    * @apiSuccess  {String}  password        User password.
    * @apiSuccess  {Boolean} isAdmin         User is admin.
-   * @apiSuccess  {String}  environments    User environments.
    * @apiSuccess  {String}  creation_date   User creation date.
    */
   findById: async (req, res, next) => {
@@ -94,14 +92,12 @@ const UserController = {
    * @apiParam    {String}    username      User username.
    * @apiParam    {String}    password      User password.
    * @apiParam    {Boolean}   isAdmin       User is admin.
-   * @apiParam    {String[]}  environments  User environments.
    *
    * @apiSuccess  {String}  _id             User id.
    * @apiSuccess  {String}  name            User name.
    * @apiSuccess  {String}  username        User username.
    * @apiSuccess  {String}  password        User password.
    * @apiSuccess  {Boolean} isAdmin         User is admin.
-   * @apiSuccess  {String}  environments    User environments.
    * @apiSuccess  {String}  creation_date   User creation date.
    */
   create: async (req, res, next) => {
@@ -110,11 +106,8 @@ const UserController = {
     const { body } = req;
 
     try {
-      if (body.environments && _.isString(body.environments)) {
-        body.environments = body.environments.split(',');
-      }
       const user = await UserService.create(body);
-      res.status(200).send(user);
+      res.status(201).send(user);
     } catch (err) {
       next(err);
     }
@@ -133,7 +126,6 @@ const UserController = {
    * @apiParam    {String}    username      User username.
    * @apiParam    {String}    password      User password.
    * @apiParam    {Boolean}   isAdmin       User is admin.
-   * @apiParam    {String[]}  environments  User environments.
    *
    * @apiExample Example usage:
    * curl -X PUT http://localhost:3000/v1/user/12345 -d myvar=myvalue
@@ -144,9 +136,6 @@ const UserController = {
     const { params, body } = req;
 
     try {
-      if (body.environments && _.isString(body.environments)) {
-        body.environments = body.environments.split(',');
-      }
       UserService.validateUserSession(req, params.id);
       const user = await UserService.update(params.id, body);
       res.status(200).send(user);
