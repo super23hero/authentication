@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/involvestecnologia/adoteonatal.svg?branch=master)](https://travis-ci.org/involvestecnologia/adoteonatal)
 [![Code Climate](https://codeclimate.com/github/involvestecnologia/adoteonatal/badges/gpa.svg)](https://codeclimate.com/github/involvestecnologia/adoteonatal)
-[![Issue Count](https://codeclimate.com/github/involvestecnologia/adoteonatal/badges/issue_count.svg)](https://codeclimate.com/github/involvestecnologia/adoteonatal)
+[![Test Coverage](https://codeclimate.com/github/involvestecnologia/adoteonatal/badges/coverage.svg)](https://codeclimate.com/github/involvestecnologia/adoteonatal/coverage)
 [![Dependency Status](https://david-dm.org/involvestecnologia/adoteonatal/status.svg)](https://david-dm.org/involvestecnologia/adoteonatal#info=dependencies)
 [![devDependency Status](https://david-dm.org/involvestecnologia/adoteonatal/dev-status.svg)](https://david-dm.org/involvestecnologia/adoteonatal#info=devDependencies)
 
