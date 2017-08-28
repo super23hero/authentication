@@ -1,28 +1,36 @@
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
-[![Issue Count](https://codeclimate.com/github/codeclimate/codeclimate/badges/issue_count.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
+[![Code Climate](https://codeclimate.com/github/involvestecnologia/adoteonatal/badges/gpa.svg)](https://codeclimate.com/github/involvestecnologia/adoteonatal)
+[![Issue Count](https://codeclimate.com/github/involvestecnologia/adoteonatal/badges/issue_count.svg)](https://codeclimate.com/github/involvestecnologia/adoteonatal)
 
-# adoteonatal
-Sistema para ajudar na doação para crianças no Natal
+# Adote o Natal
+Be the Santa Claus who need.
+We want to realize the desire of about 300 children from three institutions, from São Jose and Palhoça, municipalities of Santa Catarina.
+
+We asked them what they would like to gain from the good old man and the answers are next to the pictures of each child.
+
+--
+
+Seja o Papai Noel de quem precisa.
+Queremos realizar o desejo de cerca de 300 crianças de três instituições, de São Jose e Palhoça, municípios de Santa Catarina.
+
+Perguntamos o que elas gostariam de ganhar do bom velhinho e as respostas estão junto às fotos de cada criança.
+
+# App
+
+Open Source Application for Donation Management
 
 # Stack
 
-## Backend
 - Express
-
-## Frontend
 - Vue.js
-- Scss (BEM)
+- MongoDB
 
-## Banco de Dados
-- Mysql
-
-### Setup
+# Setup
 ```bash
 $ npm install yarn -g
 $ yarn install
 ```
-### Environment
-* Basta criar um arquivo .env baseado no .env.example
+## Environment
+1. Create an .env file based on the .env.example
 
 * NODE_ENV
   - Node environment, defaults to `development`
@@ -32,25 +40,18 @@ $ yarn install
   - [morgan log configuration](https://github.com/expressjs/morgan#predefined-formats), defaults to `dev`
 * DATABASE
   - `mongodb://` URL
-* SECRET
-  Application Secret
-* KEY
-  Application Key
 
-### Usage
-Start:
+## Usage
 ```bash
+# start
 $ yarn start
-```
-Test:
-```bash
-$ yarn test
-```
-Coverage:
-```bash
-$ yarn run coverage
-```
 
-### License
+# test
+yarn test
 
-[Licence](https://github.com/rodrigogs/express-seed/blob/master/LICENSE) © Rodrigo Gomes da Silva
+# coverage
+yarn run coverage
+
+# API docs
+yarn run docs
+```
