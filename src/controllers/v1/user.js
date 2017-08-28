@@ -1,5 +1,4 @@
 const debug = require('debug')('app:controllers:v1:environment');
-const _ = require('lodash');
 
 const UserService = require('../../services/v1/user');
 
