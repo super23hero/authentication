@@ -8,6 +8,6 @@ const router = express.Router();
 const getRoute = name => require(`./${name}`);
 
 router.use('/auth', getRoute('auth'));
-router.use('/user', getRoute('user'));
+router.use('/users', getRoute('users'));
 
 module.exports = router;
