@@ -61,6 +61,265 @@ define({ "api": [
     ]
   },
   {
+    "type": "post",
+    "url": "/v1/day-cares/",
+    "title": "Create day care",
+    "version": "1.0.0",
+    "name": "CreateDayCare",
+    "group": "DayCare",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "description": "<p>Creates a new day care.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -X POST http://localhost:3000/v1/user -d name=myenv",
+        "type": "json"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>DayCare name.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>DayCare id.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>DayCare name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "creation_date",
+            "description": "<p>DayCare creation date.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/controllers/v1/dayCare.js",
+    "groupTitle": "DayCare",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3000/v1/day-cares/"
+      }
+    ]
+  },
+  {
+    "type": "delete",
+    "url": "/v1/day-cares/:id",
+    "title": "Delete day care",
+    "version": "1.0.0",
+    "name": "DeleteDayCare",
+    "group": "DayCare",
+    "permission": [
+      {
+        "name": "user"
+      }
+    ],
+    "description": "<p>Deletes an day care.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>DayCare id.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -X DELETE http://localhost:3000/v1/day-cares/12345",
+        "type": "json"
+      }
+    ],
+    "filename": "src/controllers/v1/dayCare.js",
+    "groupTitle": "DayCare",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3000/v1/day-cares/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/v1/day-cares/:id",
+    "title": "Find day care by id",
+    "version": "1.0.0",
+    "name": "GetDayCare",
+    "group": "DayCare",
+    "permission": [
+      {
+        "name": "user"
+      }
+    ],
+    "description": "<p>Finds an day care by its id.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -X GET http://localhost:3000/v1/day-cares/597168b5f780cc3a48cf6215",
+        "type": "json"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>DayCare name.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>DayCare id.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>DayCare name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "creation_date",
+            "description": "<p>DayCare creation date.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/controllers/v1/dayCare.js",
+    "groupTitle": "DayCare",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3000/v1/day-cares/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/v1/day-care/",
+    "title": "List day cares",
+    "version": "1.0.0",
+    "name": "ListDayCares",
+    "group": "DayCare",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "description": "<p>Lists all day cares.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -i http://localhost:3000/v1/day-cares",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>Array of day cares.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/controllers/v1/dayCare.js",
+    "groupTitle": "DayCare",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3000/v1/day-care/"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "/v1/day-cares/:id",
+    "title": "Update day care",
+    "version": "1.0.0",
+    "name": "UpdateDayCare",
+    "group": "DayCare",
+    "permission": [
+      {
+        "name": "user"
+      }
+    ],
+    "description": "<p>Updates an day care.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>DayCare name.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -X PUT http://localhost:3000/v1/day-cares/12345 -d myvar=myvalue",
+        "type": "json"
+      }
+    ],
+    "filename": "src/controllers/v1/dayCare.js",
+    "groupTitle": "DayCare",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3000/v1/day-cares/:id"
+      }
+    ]
+  },
+  {
     "type": "get",
     "url": "/",
     "title": "Health check",
@@ -90,7 +349,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/v1/user/",
+    "url": "/v1/users/",
     "title": "Create user",
     "version": "1.0.0",
     "name": "CreateUser",
@@ -194,13 +453,13 @@ define({ "api": [
     "groupTitle": "User",
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/v1/user/"
+        "url": "http://localhost:3000/v1/users/"
       }
     ]
   },
   {
     "type": "delete",
-    "url": "/v1/user/:id",
+    "url": "/v1/users/:id",
     "title": "Delete user",
     "version": "1.0.0",
     "name": "DeleteUser",
@@ -227,7 +486,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -X DELETE http://localhost:3000/v1/user/12345",
+        "content": "curl -X DELETE http://localhost:3000/v1/users/12345",
         "type": "json"
       }
     ],
@@ -235,13 +494,13 @@ define({ "api": [
     "groupTitle": "User",
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/v1/user/:id"
+        "url": "http://localhost:3000/v1/users/:id"
       }
     ]
   },
   {
     "type": "get",
-    "url": "/v1/user/:id",
+    "url": "/v1/users/:id",
     "title": "Find user by id",
     "version": "1.0.0",
     "name": "GetUser",
@@ -255,7 +514,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -X GET http://localhost:3000/v1/user/597168b5f780cc3a48cf6215",
+        "content": "curl -X GET http://localhost:3000/v1/users/597168b5f780cc3a48cf6215",
         "type": "json"
       }
     ],
@@ -345,13 +604,13 @@ define({ "api": [
     "groupTitle": "User",
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/v1/user/:id"
+        "url": "http://localhost:3000/v1/users/:id"
       }
     ]
   },
   {
     "type": "get",
-    "url": "/v1/user/",
+    "url": "/v1/users/",
     "title": "List users",
     "version": "1.0.0",
     "name": "ListUsers",
@@ -386,13 +645,13 @@ define({ "api": [
     "groupTitle": "User",
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/v1/user/"
+        "url": "http://localhost:3000/v1/users/"
       }
     ]
   },
   {
     "type": "put",
-    "url": "/v1/user/:id",
+    "url": "/v1/users/:id",
     "title": "Update user",
     "version": "1.0.0",
     "name": "UpdateUser",
@@ -440,7 +699,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -X PUT http://localhost:3000/v1/user/12345 -d myvar=myvalue",
+        "content": "curl -X PUT http://localhost:3000/v1/users/12345 -d myvar=myvalue",
         "type": "json"
       }
     ],
@@ -448,7 +707,7 @@ define({ "api": [
     "groupTitle": "User",
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/v1/user/:id"
+        "url": "http://localhost:3000/v1/users/:id"
       }
     ]
   }

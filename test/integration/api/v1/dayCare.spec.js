@@ -70,7 +70,6 @@ suite('Day Cares', () => {
     });
 
     test('should fail to create a new day care when name is undefined', async () => {
-
       const res = await request(app)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
@@ -82,7 +81,6 @@ suite('Day Cares', () => {
     });
 
     test('should fail to create a new day care when name is blank', async () => {
-
       const res = await request(app)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
