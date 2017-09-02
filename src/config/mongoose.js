@@ -8,32 +8,33 @@ const url = env.DATABASE;
 
 debug(`configuring mongoose connection to ${url}`);
 
-mongoose.set('debug', env.NODE_ENV !== 'production');
-
-mongoose.connect(url, { server: { reconnectTries: Number.MAX_VALUE, useMongoClient: true } });
-
 mongoose.Promise = Promise;
 
-mongoose.connection.on('connected', () => logger.info(`Mongoose default connection open to ${url}`));
+mongoose.set('debug', env.NODE_ENV === 'development');
 
-mongoose.connection.on('error', err => logger.error(`Mongoose default connection error: ${err}`));
+module.exports = new Promise((resolve, reject) => {
+  mongoose.connect(url, { reconnectTries: Number.MAX_VALUE, useMongoClient: true });
 
-mongoose.connection.on('disconnected', () => logger.info('Mongoose default connection disconnected'));
+  mongoose.connection.on('connected', () => logger.info(`Mongoose default connection open to ${url}`));
 
-mongoose.connection.once('open', async () => {
-  logger.info('Mongoose default connection is open');
-  const count = await User.count({});
-  if (count > 0) return;
-  debug('creating "admin" user since there\'s no users in the database');
+  mongoose.connection.on('error', err => logger.error(`Mongoose default connection error: ${err}`) && reject(err));
 
-  new User({ name: 'Administrator', email: 'daniel.kuroski@gmail.com', username: 'involves', password: 'admin', isAdmin: true }).save();
-});
+  mongoose.connection.on('disconnected', () => logger.info('Mongoose default connection disconnected'));
 
-process.on('SIGINT', () => {
-  mongoose.connection.close(() => {
-    logger.error('Mongoose default connection disconnected through app termination');
-    process.exit(0);
+  mongoose.connection.once('open', async () => {
+    logger.info('Mongoose default connection is open');
+    const count = await User.count({});
+    if (count > 0) return resolve();
+    debug('creating "admin" user since there\'s no users in the database');
+
+    await new User({ name: 'Administrator', username: 'involves', password: 'admin', isAdmin: true }).save();
+    resolve();
+  });
+
+  process.on('SIGINT', () => {
+    mongoose.connection.close(() => {
+      logger.error('Mongoose default connection disconnected through app termination');
+      process.exit(0);
+    });
   });
 });
-
-module.exports = mongoose;

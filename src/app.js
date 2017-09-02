@@ -9,11 +9,15 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
+const util = require('util');
+const EventEmitter = require('events');
 
 debug('bootstrapping application');
 
 const config = require('./config');
 const routes = require('./routes');
+
+util.inherits(express, EventEmitter);
 
 const app = express();
 
@@ -25,7 +29,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(config.passport.initialize());
 app.use(routes);
 
-config.mongoose.connection.on('connected', () => app.emit('ready'));
-config.mongoose.connection.on('error', err => app.emit('error', err));
+config.statusHandler.handle(app);
 
 module.exports = app;

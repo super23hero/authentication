@@ -9,4 +9,5 @@ module.exports = {
   logger: require('./logger'),
   passport: require('./passport'),
   mongoose: require('./mongoose'),
+  statusHandler: require('./statusHandler'),
 };

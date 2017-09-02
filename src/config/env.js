@@ -8,5 +8,5 @@ module.exports = {
   NODE_ENV: env('node_env') || 'development',
   PORT: env('port') || 3000,
   HTTP_LOG_CONFIG: env('http_log_config') || 'dev',
-  DATABASE: env('database') || 'mongodb://localhost',
+  DATABASE: env('database') || 'mongodb://localhost:27017/adoteonatal',
 };
