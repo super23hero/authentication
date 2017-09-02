@@ -5,7 +5,7 @@ const UserService = require('../../services/v1/user');
 const UserController = {
 
   /**
-   * @api {get} /v1/user/ List users
+   * @api {get} /v1/users/ List users
    * @apiVersion 1.0.0
    * @apiName ListUsers
    * @apiGroup User
@@ -38,7 +38,7 @@ const UserController = {
   },
 
   /**
-   * @api {get} /v1/user/:id Find user by id
+   * @api {get} /v1/users/:id Find user by id
    * @apiVersion 1.0.0
    * @apiName GetUser
    * @apiGroup User
@@ -47,7 +47,7 @@ const UserController = {
    * @apiDescription Finds an user by its id.
    *
    * @apiExample Example usage:
-   * curl -X GET http://localhost:3000/v1/user/597168b5f780cc3a48cf6215
+   * curl -X GET http://localhost:3000/v1/users/597168b5f780cc3a48cf6215
    *
    * @apiParam    {String}    name          User name.
    * @apiParam    {String}    username      User username.
@@ -76,7 +76,7 @@ const UserController = {
   },
 
   /**
-   * @api {post} /v1/user/ Create user
+   * @api {post} /v1/users/ Create user
    * @apiVersion 1.0.0
    * @apiName CreateUser
    * @apiGroup User
@@ -113,7 +113,7 @@ const UserController = {
   },
 
   /**
-   * @api {put} /v1/user/:id Update user
+   * @api {put} /v1/users/:id Update user
    * @apiVersion 1.0.0
    * @apiName UpdateUser
    * @apiGroup User
@@ -127,7 +127,7 @@ const UserController = {
    * @apiParam    {Boolean}   isAdmin       User is admin.
    *
    * @apiExample Example usage:
-   * curl -X PUT http://localhost:3000/v1/user/12345 -d myvar=myvalue
+   * curl -X PUT http://localhost:3000/v1/users/12345 -d myvar=myvalue
    */
   update: async (req, res, next) => {
     debug('update action');
@@ -144,7 +144,7 @@ const UserController = {
   },
 
   /**
-   * @api {delete} /v1/user/:id Delete user
+   * @api {delete} /v1/users/:id Delete user
    * @apiVersion 1.0.0
    * @apiName DeleteUser
    * @apiGroup User
@@ -155,7 +155,7 @@ const UserController = {
    * @apiParam {String} id User id.
    *
    * @apiExample Example usage:
-   * curl -X DELETE http://localhost:3000/v1/user/12345
+   * curl -X DELETE http://localhost:3000/v1/users/12345
    */
   delete: async (req, res, next) => {
     debug('delete action');
