@@ -14,7 +14,9 @@ import About from './front/views/about.vue'
 import Manager from './manager/manager.vue'
 import Login from './manager/views/login/login.vue'
 import Panel from './manager/views/panel.vue'
+import Users from './manager/views/users/users.vue'
 import UsersList from './manager/views/users/users.list.vue'
+import UsersNew from './manager/views/users/users.new.vue'
 import UsersEdit from './manager/views/users/users.edit.vue'
 
 /*
@@ -59,14 +61,21 @@ let routes = [
             },
             {
                 path: 'users',
+                components: {
+                    managerRouter: Users,
+                },
                 children: [
                     {
-                        path: 'list',
+                        path: '',
                         component: UsersList
                     },
                     {
-                        path: 'edit/:id',
-                        components: UsersEdit,
+                        path: 'new',
+                        component: UsersNew,
+                    },
+                    {
+                      path: ':id',
+                      component: UsersEdit,
                     }
                 ]
             }
@@ -86,13 +95,13 @@ let router = new VueRouter({
 router.beforeEach((to, from, next) => {
     console.log(to);
 
-    let pathSplitted = to.path.split('/');
-    console.log(pathSplitted);
-    if(pathSplitted[1] === 'admin' && pathSplitted[2] !== 'login' && !Auth.user.authenticated) {
-        next(false);
-        router.push('/admin/login');
-        console.log('caiu')
-    }
+    // let pathSplitted = to.path.split('/');
+    // console.log(pathSplitted);
+    // if(pathSplitted[1] === 'admin' && pathSplitted[2] !== 'login' && !Auth.user.authenticated) {
+    //     next(false);
+    //     router.push('/admin/login');
+    //     console.log('caiu')
+    // }
 
     next();
 });

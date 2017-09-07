@@ -3,7 +3,7 @@
         <h1>Users List</h1>
 
         <ul>
-            <li v-for="user of userList">
+            <li v-for="user in userList">
                 {{user.name}}
             </li>
         </ul>
@@ -33,14 +33,14 @@
 
         },
         created() {
-            RequestService
-                .retrieve('')
-                .then(response => {
-
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+//            RequestService
+//                .retrieve('')
+//                .then(response => {
+//
+//                })
+//                .catch(error => {
+//                    console.log(error);
+//                });
         }
     }
 </script>
