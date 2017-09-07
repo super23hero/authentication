@@ -6,6 +6,7 @@ chai.should();
 
 const app = require('../../../../src/app');
 const statusHandler = require('../../../../src/config/statusHandler');
+const { auth } = require('./auth.helper');
 
 before(async () => {
   if (statusHandler.getStatus() === statusHandler.STATUSES.READY) {
@@ -23,11 +24,7 @@ before(async () => {
 suite('Auth', () => {
   suite('#token', () => {
     test('should authenticate and return the authenticated token', async () => {
-      const res = await request(app)
-        .post('/v1/auth')
-        .send({ username: 'involves', password: 'admin' })
-        .expect(200);
-
+      const res = await auth();
       res.body.should.be.an('object');
       res.body.token.should.be.a('string');
     });
