@@ -25,7 +25,6 @@ before(async () => {
 });
 
 suite('Users', () => {
-
   beforeEach(async () => {
     token = await getToken();
   });
