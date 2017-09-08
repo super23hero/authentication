@@ -6,17 +6,10 @@ chai.should();
 
 const app = require('../../../../src/app');
 const statusHandler = require('../../../../src/config/statusHandler');
+const { getToken } = require('./auth.helper');
 
 // Setup
 let token = '';
-const getToken = async (username = 'involves', password = 'admin') => {
-  const res = await request(app)
-    .post('/v1/auth')
-    .send({ username, password })
-    .expect(200);
-
-  return res.body.token;
-};
 
 before(async () => {
   if (statusHandler.getStatus() === statusHandler.STATUSES.READY) {
@@ -31,11 +24,11 @@ before(async () => {
   });
 });
 
-beforeEach(async () => {
-  token = await getToken();
-});
-
 suite('Users', () => {
+  beforeEach(async () => {
+    token = await getToken();
+  });
+
   suite('#create', () => {
     test('should create a new user', async () => {
       const name = faker.internet.userName();
