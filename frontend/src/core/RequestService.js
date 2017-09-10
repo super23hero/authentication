@@ -24,7 +24,7 @@ class RequestService {
 
 	update(url, id, data) {
 
-		return axios.put(API_URL+url+'/'+id, data), this.config;
+		return axios.put(API_URL+url+'/'+id, data, this.config);
 	}
 
 	delete(url, id) {

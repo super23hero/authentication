@@ -23,6 +23,7 @@
 
 <script>
     import authService from '../../../core/Auth'
+    import Form from '../../../core/Form'
 
     export default {
         name: 'login',
