@@ -61,7 +61,7 @@ suite('Users', () => {
       const res = await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, username, password })
+        .send({ name, username, email, password })
         .expect(500);
 
       res.body.should.be.an('object');
