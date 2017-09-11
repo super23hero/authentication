@@ -14,6 +14,7 @@ rules:
   no-unused-expressions: off
   object-curly-newline: off
   prefer-destructuring: off
+  func-names: off
 globals:
   process: on
   describe: on
