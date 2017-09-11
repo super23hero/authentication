@@ -2,18 +2,21 @@
     <div>
         <h1>Users List</h1>
 
-        <ul>
-            <li v-for="user in userList">
-              <div>
-                <span>
-                  {{user.name}}
-                </span>
-                <span>
-                  <button type="button" v-on:click="onDelete(user.id)">Delete</button>
-                </span>
+        <div class="datatable">
+            <div class="datatable__header">
+              <div class="datatable__column-name" v-for="columnName in header">
+                {{columnName.name}}
               </div>
-            </li>
-        </ul>
+            </div>
+            <div class="datatable__row" v-for="row in data">
+                <div class="datatable__cell">
+                  {{user.name}}
+                </div>
+                <div>
+                  <button type="button" @click="deleteUser(user.id)">Delete</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -38,7 +41,7 @@
             }
         },
         methods: {
-          onDelete(userId) {
+          deleteUser(userId) {
           	this.requestService
               .delete('users', userId)
               .then(response => {

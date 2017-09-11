@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Users New</h1>
-    <form method="POST" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+    <form method="POST" @submit.prevent="createUser" @keydown="form.errors.clear($event.target.name)">
       <div class="control">
         <label for="name" class="label">Nome:</label>
         <input type="text" id="name" name="name" class="input" v-model="form.name">
@@ -55,7 +55,7 @@
           }
       },
       methods: {
-        onSubmit() {
+        createUser() {
           let user = this.form;
 
           this.requestService

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Users Edit</h1>
-    <form method="POST" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+    <form method="POST" @submit.prevent="editUser" @keydown="form.errors.clear($event.target.name)">
       <div class="control">
         <label for="name" class="label">Nome:</label>
         <input type="text" id="name" name="name" class="input" v-model="form.name">
@@ -22,13 +22,13 @@
 
       <div class="control">
         <label for="oldPassword" class="label">Senha antiga:</label>
-        <input type="oldPassword" id="oldPassword" name="oldPassword" class="input" v-model="form.oldPassword">
+        <input type="password" id="oldPassword" name="oldPassword" class="input" v-model="form.oldPassword">
         <span class="help is-danger" v-if="form.errors.has('oldPassword')" v-text="form.errors.get('oldPassword')"></span>
       </div>
 
       <div class="control">
         <label for="newPassword" class="label">Nova senha:</label>
-        <input type="newPassword" id="newPassword" name="newPassword" class="input" v-model="form.newPassword">
+        <input type="password" id="newPassword" name="newPassword" class="input" v-model="form.newPassword">
         <span class="help is-danger" v-if="form.errors.has('newPassword')" v-text="form.errors.get('newPassword')"></span>
       </div>
 
@@ -70,7 +70,7 @@
       this.form.username = userRetrieved.username;
     },
     methods: {
-      onSubmit() {
+      editUser() {
         let user = this.form;
 
         this.requestService
