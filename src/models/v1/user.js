@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const beautifyUnique = require('mongoose-beautiful-unique-validation');
 const crypto = require('crypto');
+const validator = require('validator');
+const md5 = require('md5');
 
 const Schema = mongoose.Schema;
 
@@ -15,6 +17,13 @@ const UserSchema = new Schema({
     trim: true,
     required: [true, 'User [username] field is required'],
     unique: 'Given username is already in use',
+  },
+  email: {
+    type: String,
+    lowercase: true,
+    trim: true,
+    validate: [validator.isEmail, 'Invalid Email Address'],
+    required: 'Please Supply an email address',
   },
   hashed_password: {
     type: String,
@@ -33,6 +42,11 @@ const UserSchema = new Schema({
     type: Date,
     default: new Date(),
   },
+});
+
+UserSchema.virtual('gravatar').get(function () {
+  const hash = md5(this.email);
+  return `https://gravatar.com/avatar/${hash}?s=200`;
 });
 
 UserSchema.virtual('password')

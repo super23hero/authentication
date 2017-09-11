@@ -31,27 +31,36 @@ const ChildSchema = new Schema({
     required: [true, 'Child [photo] field is required'],
   },
   toy: {
-    will_receive: Boolean,
-    received: Boolean,
-    delivered: Boolean,
+    status: {
+      type: String,
+      trim: true,
+      enum: ['willReceive', 'received', 'delivered'],
+      required: [true, 'Child [toy_status] field is required'],
+    },
     wish: {
       type: String,
       required: [true, 'Child [toy_wish] field is required'],
     },
   },
   cloth: {
-    will_receive: Boolean,
-    received: Boolean,
-    delivered: Boolean,
+    status: {
+      type: String,
+      trim: true,
+      enum: ['willReceive', 'received', 'delivered'],
+      required: [true, 'Child [cloth_status] field is required'],
+    },
     size: {
       type: String,
       required: [true, 'Child [cloth_size] field is required'],
     },
   },
   shoe: {
-    will_receive: Boolean,
-    received: Boolean,
-    delivered: Boolean,
+    status: {
+      type: String,
+      trim: true,
+      enum: ['willReceive', 'received', 'delivered'],
+      required: [true, 'Child [shoe_status] field is required'],
+    },
     size: {
       type: String,
       required: [true, 'Child [shoe_size] field is required'],

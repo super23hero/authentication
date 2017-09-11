@@ -17,6 +17,11 @@ const DonationSchema = new Schema({
       required: [true, 'Donation Donor [email] field is required'],
     },
   },
+  items: {
+    toy: Boolean,
+    cloth: Boolean,
+    shoe: Boolean,
+  },
   child: {
     type: ObjectId,
     ref: 'Child',
