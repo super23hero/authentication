@@ -33,12 +33,13 @@ suite('Users', () => {
     test('should create a new user', async () => {
       const name = faker.internet.userName();
       const username = faker.internet.userName();
+      const email = faker.internet.email();
       const password = faker.internet.password(8);
 
       const res = await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, username, password })
+        .send({ name, username, email, password })
         .expect(201);
 
       res.body.should.be.an('object');
@@ -48,12 +49,13 @@ suite('Users', () => {
     test('should fail to create a new user when username is duplicated', async () => {
       const name = faker.internet.userName();
       const username = faker.internet.userName();
+      const email = faker.internet.email();
       const password = faker.internet.password(8);
 
       await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, username, password })
+        .send({ name, username, email, password })
         .expect(201);
 
       const res = await request(app)
@@ -68,12 +70,13 @@ suite('Users', () => {
 
     test('should fail to create a new user when name is undefined', async () => {
       const username = faker.internet.userName();
+      const email = faker.internet.email();
       const password = faker.internet.password(8);
 
       const res = await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ username, password })
+        .send({ username, email, password })
         .expect(500);
 
       res.body.should.be.an('object');
@@ -82,12 +85,13 @@ suite('Users', () => {
 
     test('should fail to create a new user when username is undefined', async () => {
       const name = faker.internet.userName();
+      const email = faker.internet.email();
       const password = faker.internet.password(8);
 
       const res = await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, password })
+        .send({ name, email, password })
         .expect(500);
 
       res.body.should.be.an('object');
@@ -96,12 +100,13 @@ suite('Users', () => {
 
     test('should fail to create a new user when password is undefined', async () => {
       const name = faker.internet.userName();
+      const email = faker.internet.email();
       const username = faker.internet.userName();
 
       const res = await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, username })
+        .send({ name, email, username })
         .expect(500);
 
       res.body.should.be.an('object');
@@ -110,12 +115,13 @@ suite('Users', () => {
 
     test('should fail to create a new user when name is blank', async () => {
       const username = faker.internet.userName();
+      const email = faker.internet.email();
       const password = faker.internet.password(8);
 
       const res = await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: ' ', username, password })
+        .send({ name: ' ', username, email, password })
         .expect(500);
 
       res.body.should.be.an('object');
@@ -127,12 +133,13 @@ suite('Users', () => {
     test('should delete an user', async () => {
       const name = faker.internet.userName();
       const username = faker.internet.userName();
+      const email = faker.internet.email();
       const password = faker.internet.password(8);
 
       const userInsert = await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, username, password })
+        .send({ name, username, email, password })
         .expect(201);
 
       const res = await request(app)
@@ -162,12 +169,13 @@ suite('Users', () => {
       const expectName = faker.internet.userName();
       const name = faker.internet.userName();
       const username = faker.internet.userName();
+      const email = faker.internet.email();
       const password = faker.internet.password(8);
 
       const userInsert = await request(app)
         .post('/v1/users')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, username, password })
+        .send({ name, username, email, password })
         .expect(201);
 
       const res = await request(app)
