@@ -3,7 +3,7 @@ const beautifyUnique = require('mongoose-beautiful-unique-validation');
 
 const Schema = mongoose.Schema;
 
-const SuporterSchema = new Schema({
+const SupporterSchema = new Schema({
   name: {
     type: String,
     trim: true,
@@ -21,14 +21,14 @@ const SuporterSchema = new Schema({
   },
 });
 
-SuporterSchema.post('validate', (doc) => {
+SupporterSchema.post('validate', (doc) => {
   if (doc.isNew) {
     doc.creation_date = new Date();
   }
 });
 
-SuporterSchema.plugin(beautifyUnique);
+SupporterSchema.plugin(beautifyUnique);
 
-const Suporter = mongoose.model('Suporter', SuporterSchema);
+const Supporter = mongoose.model('Supporter', SupporterSchema);
 
-module.exports = Suporter;
+module.exports = Supporter;
