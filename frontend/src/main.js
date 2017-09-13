@@ -1,4 +1,5 @@
 import './bootstrap'
+import './style/main.scss'
 import router from './router'
 
 new Vue({
