@@ -18,11 +18,11 @@
             <!--</div>-->
         <!--</div>-->
 
-      <div class="c-fluxopesquisa-table-counter">
+      <div class="datatable-counter">
         15 modelos de fluxo | 5 abertos | 0 fechados
       </div>
-      <table class="c-fluxopesquisa-table-container__table">
-        <thead class="c-fluxopesquisa-table-container__table-header">
+      <table class="datatable">
+        <thead class="datatable__header">
           <tr>
             <th>Nome do modelo</th>
             <th>Última atualização</th>
@@ -30,13 +30,13 @@
             <th></th>
           </tr>
         </thead>
-        <tbody class="c-fluxopesquisa-table-container__table-body">
+        <tbody class="datatable__body">
           <tr class="animated fadeIn">
             <td data-title="Nome do modelo">Solicitação de manutenção</td>
             <td data-title="Última atualização">21/12/2016 às 14:31</td>
             <td data-title="Status">3 fluxos abertos, 1 fechado e 1 pendente</td>
             <td>
-              <button class="c-fluxopesquisa-table-container__delete-btn"><i class="fa fa-trash"></i></button>
+              <button class="datatable__delete-btn"><i class="fa fa-trash"></i></button>
             </td>
           </tr>
         </tbody>

@@ -25,7 +25,7 @@ $fluxopesquisa-models-table-space: .6rem 1rem;
 
 /*==========================================================*/
 
-.c-fluxopesquisa-table-counter {
+.datatable-counter {
   font-size: 1.4rem;
   text-align: center;
   color: map-get($fluxopesquisa-models-colors, font-color);
@@ -36,16 +36,12 @@ $fluxopesquisa-models-table-space: .6rem 1rem;
   }
 }
 
-.c-fluxopesquisa-table-container {
-  // all: inital;
+.datatable {
   color: map-get($fluxopesquisa-models-colors, font-color);
-}
-
-.c-fluxopesquisa-table-container__table {
   width: 100%;
 }
 
-.c-fluxopesquisa-table-container__table-header {
+.datatable__header {
   display: none;
   background: map-get($fluxopesquisa-models-colors, table-header-bg);
   font-weight: bold;
@@ -57,7 +53,7 @@ $fluxopesquisa-models-table-space: .6rem 1rem;
   }
 }
 
-.c-fluxopesquisa-table-container__table-header > tr > th {
+.datatable__header > tr > th {
   padding: $fluxopesquisa-models-table-space;
   border: solid 1px map-get($fluxopesquisa-models-colors, table-header-border);
   &:last-child {
@@ -68,7 +64,7 @@ $fluxopesquisa-models-table-space: .6rem 1rem;
   }
 }
 
-.c-fluxopesquisa-table-container__table-body {
+.datatable__body {
   display: flex;
   flex-direction: column;
   @include fluxopesquisa-models-respond-to('window-small') {
@@ -76,7 +72,7 @@ $fluxopesquisa-models-table-space: .6rem 1rem;
   }
 }
 
-.c-fluxopesquisa-table-container__table-body > tr {
+.datatable__body > tr {
   cursor: pointer;
   transition: all .2s ease-in-out;
   margin-bottom: 1rem;
@@ -101,7 +97,7 @@ $fluxopesquisa-models-table-space: .6rem 1rem;
   }
 }
 
-.c-fluxopesquisa-table-container__table-body > tr > td {
+.datatable__body > tr > td {
   padding: $fluxopesquisa-models-table-space;
   &:last-child {
     text-align: right;
@@ -115,7 +111,7 @@ $fluxopesquisa-models-table-space: .6rem 1rem;
   }
 }
 
-.c-fluxopesquisa-table-container__table-body > tr > td[data-title]:before {
+.datatable__body > tr > td[data-title]:before {
   content: attr(data-title);
   font-weight: bold;
   font-size: 1.4rem;
@@ -127,7 +123,7 @@ $fluxopesquisa-models-table-space: .6rem 1rem;
   }
 }
 
-.c-fluxopesquisa-table-container__delete-btn {
+.datatable__delete-btn {
   border: none;
   background: none;
   color: map-get($fluxopesquisa-models-colors, font-color);
