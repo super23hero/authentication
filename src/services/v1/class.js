@@ -1,7 +1,5 @@
 const debug = require('debug')('app:services:v1:class');
-const _ = require('lodash');
 
-const NotFoundError = require('../../errors/notFound');
 const ClassSchema = require('../../models/v1/class');
 
 const ClassService = {
