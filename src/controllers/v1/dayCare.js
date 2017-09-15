@@ -1,4 +1,4 @@
-const debug = require('debug')('app:controllers:v1:environment');
+const debug = require('debug')('app:controllers:v1:dayCare');
 
 const DayCareService = require('../../services/v1/dayCare');
 
@@ -16,7 +16,7 @@ const DayCareController = {
    * @apiExample Example usage:
    * curl -i http://localhost:3000/v1/day-cares
    *
-   * @apiSuccess {Object[]} users Array of day cares.
+   * @apiSuccess {Object[]} dayCares Array of day cares.
    */
   list: async (req, res, next) => {
     debug('list action');

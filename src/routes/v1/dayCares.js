@@ -1,4 +1,4 @@
-const debug = require('debug')('app:routes:v1:user');
+const debug = require('debug')('app:routes:v1:dayCares');
 const express = require('express');
 
 debug('configuring day cares routes');
