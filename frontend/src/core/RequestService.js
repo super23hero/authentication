@@ -28,7 +28,7 @@ class RequestService {
 	}
 
 	delete(url, id) {
-		return axios.get(API_URL+url+'/'+id, this.config);
+		return axios.delete(API_URL+url+'/'+id, this.config);
 	}
 }
 
