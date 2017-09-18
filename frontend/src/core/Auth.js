@@ -68,6 +68,9 @@ export const Auth = {
     checkAuth() {
         let token = localStorage.getItem('access_token');
         this.user.authenticated = !!token;
+        if(this.user.authenticated) {
+          axios.defaults.headers.common.Authorization = this.getAuthHeader();
+        }
         return this.user.authenticated;
     },
 
