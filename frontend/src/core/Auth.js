@@ -1,11 +1,12 @@
 import router from '../router'
+import axiosLib from 'axios'
 
 // URL and endpoint constants
 const LOGIN_URL = API_URL + 'auth'
 // const SIGNUP_URL = API_URL + 'users/'
 
 // Set config defaults when creating the instance
-var authAxiosInstance = axios.create({
+const authAxiosInstance = axiosLib.create({
     baseURL: LOGIN_URL
 });
 
@@ -13,7 +14,7 @@ var authAxiosInstance = axios.create({
 // authAxiosInstance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 authAxiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-module.exports =  {
+export const Auth = {
 
     // User object will let us check authentication status
     user: {
@@ -27,7 +28,7 @@ module.exports =  {
                 let data = response.data;
                 // localStorage.setItem('id_token', data.id_token)
                 localStorage.setItem('access_token', data.token);
-
+                axios.defaults.headers.common.Authorization = this.getAuthHeader();
                 this.user.authenticated = true;
 
                 // Redirect to a specified route
@@ -58,26 +59,20 @@ module.exports =  {
 
     // To log out, we just need to remove the token
     logout(redirect) {
-        // localStorage.removeItem('id_token')
-        localStorage.removeItem('access_token')
-        this.user.authenticated = false
+        localStorage.removeItem('access_token');
+        this.user.authenticated = false;
+        delete axios.defaults.headers.common.Authorization;
         router.push(redirect);
     },
 
     checkAuth() {
-        let token = localStorage.getItem('access_token')
-        if(token) {
-            this.user.authenticated = true
-        }
-        else {
-            this.user.authenticated = false
-        }
+        let token = localStorage.getItem('access_token');
+        this.user.authenticated = !!token;
+        return this.user.authenticated;
     },
 
     // The object to be passed as a header for authenticated requests
     getAuthHeader() {
-        return {
-            'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-        }
+        return 'Bearer ' + localStorage.getItem('access_token');
     }
-}
+};

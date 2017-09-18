@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import Auth from './core/Auth'
+import {Auth as Auth} from './core/Auth';
 
 /*
 * FRONT
@@ -95,13 +95,13 @@ let router = new VueRouter({
 router.beforeEach((to, from, next) => {
     console.log(to);
 
-    // let pathSplitted = to.path.split('/');
-    // console.log(pathSplitted);
-    // if(pathSplitted[1] === 'admin' && pathSplitted[2] !== 'login' && !Auth.user.authenticated) {
-    //     next(false);
-    //     router.push('/admin/login');
-    //     console.log('caiu')
-    // }
+    let pathSplitted = to.path.split('/');
+    console.log(pathSplitted);
+    if(pathSplitted[1] === 'admin' && pathSplitted[2] !== 'login' && !Auth.checkAuth()) {
+        next(false);
+        router.push('/admin/login');
+        console.log('caiu')
+    }
 
     next();
 });
