@@ -1,6 +1,6 @@
 <template>
   <main>
-    <manager-menu></manager-menu>
+    <manager-menu v-show="matched"></manager-menu>
     <manager-content>
         <router-view name="managerRouter"></router-view>
     </manager-content>
@@ -22,6 +22,11 @@
             return {
 
             }
+        },
+        computed: {
+          matched: function() {
+            return this.$route.path.indexOf('login') < 0;
+          }
         }
     }
 </script>
