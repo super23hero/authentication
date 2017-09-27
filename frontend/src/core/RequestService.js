@@ -24,6 +24,7 @@ class RequestService {
 	delete(url, id) {
 		return axios.delete(API_URL+url+'/'+id);
 	}
+
 }
 
 export default RequestService;
