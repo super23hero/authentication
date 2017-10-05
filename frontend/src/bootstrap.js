@@ -1,3 +1,7 @@
+import 'normalize.css';
+require('../node_modules/font-awesome/scss/font-awesome.scss');
+require('../node_modules/bootstrap/scss/bootstrap.scss');
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import axiosLib from 'axios'
