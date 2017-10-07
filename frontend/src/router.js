@@ -6,7 +6,8 @@ import {Auth as Auth} from './core/Auth';
 */
 import Front from './front/front.vue'
 import Home from './front/views/home.vue'
-import About from './front/views/about.vue'
+import PreviousYears from './front/views/previous-years.vue'
+import Adopt from './front/views/adopt.vue'
 
 /*
 * MANAGER
@@ -36,9 +37,15 @@ let routes = [
                 }
             },
             {
-                path: 'quem-somos',
+                path: 'edicoes-anteriores',
                 components: {
-                    frontRouter: About,
+                    frontRouter: PreviousYears ,
+                }
+            },
+            {
+                path: 'adotar',
+                components: {
+                  frontRouter: Adopt,
                 }
             }
         ]

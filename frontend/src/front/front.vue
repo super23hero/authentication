@@ -2,9 +2,9 @@
     <div class="main">
         <div class="content-container">
           <top></top>
-          <content>
+          <middle>
             <router-view name="frontRouter"></router-view>
-          </content>
+          </middle>
         </div>
         <bottom></bottom>
     </div>
@@ -12,12 +12,14 @@
 
 <script>
     import top from './containers/top.vue'
+    import middle from './containers/content.vue'
     import bottom from './containers/bottom.vue'
 
     export default {
         name: 'front',
         components: {
             top,
+            middle,
             bottom
         },
         data () {
