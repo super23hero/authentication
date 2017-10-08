@@ -13,9 +13,10 @@
         </thead>
         <tbody class="datatable__body">
           <tr class="animated fadeIn" v-for="user in userList">
+            <td data-title="ID">{{user._id}}</td>
             <td data-title="Nome">{{user.name}}</td>
             <td>
-              <button class="datatable__delete-btn" @click="deleteUser(user.id)"><i class="fa fa-trash"></i></button>
+              <button class="datatable__delete-btn" @click="deleteUser(user._id)"><i class="fa fa-trash"></i></button>
             </td>
           </tr>
         </tbody>
@@ -35,6 +36,7 @@
                 userList: [],
                 requestService: new RequestService(),
                 header: [
+                  'ID',
                 	'Nome',
                 ]
             }

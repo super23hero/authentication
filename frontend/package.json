@@ -9,6 +9,10 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "bootstrap": "4.0.0-beta",
+    "font-awesome": "^4.7.0",
+    "normalize": "^0.3.1",
+    "normalize.css": "^7.0.0",
     "vue": "^2.2.1"
   },
   "devDependencies": {

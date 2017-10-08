@@ -3,7 +3,9 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry: ['./src/main.js', './src/style/main.scss'],
+    entry: ['./src/main.js',
+            // './src/style/main.scss'
+    ],
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
@@ -37,6 +39,14 @@ module.exports = {
                 options: {
                     name: 'assets/[name].[ext]?[hash]'
                 }
+            },
+            {
+              test: /\.css$/,
+              use: [{
+                loader: 'style-loader'
+              }, {
+                loader: 'css-loader'
+              }],
             },
             {
               test: /\.scss$/,
@@ -86,12 +96,12 @@ module.exports = {
     // sassLoader: {
     //     includePaths: [ 'client/style' ]
     // },
-    plugins: [
-        new ExtractTextPlugin({ // define where to save the file
-            filename: '[name].bundle.css',
-            allChunks: true,
-        }),
-    ]
+    // plugins: [
+    //     new ExtractTextPlugin({ // define where to save the file
+    //         filename: '[name].bundle.css',
+    //         allChunks: true,
+    //     }),
+    // ]
 }
 
 if (process.env.NODE_ENV === 'production') {

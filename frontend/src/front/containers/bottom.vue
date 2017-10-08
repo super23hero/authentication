@@ -1,5 +1,7 @@
 <template>
-    <div><h1>Footer</h1></div>
+    <div class="footer">
+      <h1>Footer</h1>
+    </div>
 </template>
 
 <script>
@@ -10,3 +12,10 @@
         }
     }
 </script>
+
+<style>
+  .footer {
+    background-color: red;
+    min-height: 10rem;
+  }
+</style>

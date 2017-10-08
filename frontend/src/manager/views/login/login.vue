@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import authService from '../../../core/Auth'
+    import {Auth as authService} from '../../../core/Auth'
     import Form from '../../../core/Form'
 
     export default {
@@ -42,7 +42,7 @@
                 let creds = this.form;
 
                 authService
-                    .login(creds, '/admin/users/list')
+                    .login(creds, '/admin')
                     .catch(errors => {
                         this.form.showErrors(errors);
                     });
