@@ -1,10 +1,10 @@
 <template>
-  <main>
+  <div class="manager">
     <manager-menu v-show="matched"></manager-menu>
     <manager-content>
         <router-view name="managerRouter"></router-view>
     </manager-content>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -30,3 +30,12 @@
         }
     }
 </script>
+
+<style>
+  .manager {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+</style>

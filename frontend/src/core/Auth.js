@@ -35,9 +35,6 @@ export const Auth = {
                 if(redirect) {
                     router.push(redirect);
                 }
-            })
-            .catch((response) => {
-                console.log(response);
             });
     },
 

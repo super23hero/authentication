@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="manager__content">
     <slot></slot>
   </div>
 </template>
@@ -12,3 +12,12 @@
     }
   }
 </script>
+
+<style>
+  .manager__content {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
