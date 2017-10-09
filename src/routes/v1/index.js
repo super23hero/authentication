@@ -11,5 +11,6 @@ router.use('/auth', getRoute('auth'));
 router.use('/users', getRoute('users'));
 router.use('/day-cares', getRoute('dayCares'));
 router.use('/classes', getRoute('class'));
+router.use('/children', getRoute('children'));
 
 module.exports = router;

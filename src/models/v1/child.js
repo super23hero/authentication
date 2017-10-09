@@ -69,6 +69,7 @@ const ChildSchema = new Schema({
   class: {
     type: ObjectId,
     ref: 'Class',
+    required: [true, 'Child [class] field is required'],
   },
   creation_date: {
     type: Date,
