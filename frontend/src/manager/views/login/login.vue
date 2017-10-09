@@ -10,6 +10,9 @@
           </div>
           <div class="panel-body">
             <form role="form" method="POST" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+              <div class="alert alert-danger" v-if="hasError" role="alert">
+                Login ou senha incorreto.
+              </div>
               <div class="form-group">
                 <label for="username" class="label">Username or Email</label>
                 <input type="text" class="form-control" id="username" name="username" v-model="form.username" placeholder="Enter email">
@@ -20,7 +23,7 @@
                 <input type="password" class="form-control" id="password" name="password" v-model="form.password" placeholder="Password">
                 <span class="help is-danger" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
               </div>
-              <button type="submit" class="btn btn-lg btn-success btn-block" :disabled="form.errors.any()">Sign in</button>
+              <button type="submit" class="btn btn-lg btn-success btn-block" :disabled="form.errors.any() || isLoading">Sign in</button>
             </form>
           </div>
         </div>
@@ -41,17 +44,24 @@
         form: new Form({
           username: '',
           password: ''
-        })
+        }),
+        hasError: false,
+        isLoading: false,
       }
     },
     methods: {
       onSubmit() {
         let creds = this.form;
+        this.isLoading = true;
 
         authService
           .login(creds, '/admin')
           .catch(errors => {
             this.form.showErrors(errors);
+            this.hasError = true;
+          })
+          .then(() => {
+            this.isLoading = false;
           });
       }
     }
@@ -61,8 +71,8 @@
 <style>
   .login {
     margin-top: 30%;
-    padding: 0.5rem;
-    border-radius: 2px;
+    padding: 1rem;
+    border-radius: 0.3rem;
     box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
 
   }
