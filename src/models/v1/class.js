@@ -14,6 +14,7 @@ const ClassSchema = new Schema({
   day_care: {
     type: ObjectId,
     ref: 'DayCare',
+    required: [true, 'Class [day_care] field is required'],
   },
   creation_date: {
     type: Date,
