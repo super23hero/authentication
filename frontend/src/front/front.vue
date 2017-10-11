@@ -43,5 +43,6 @@
     flex: 1;
     height: 100%;
     padding-bottom: 10rem;
+    background-color: #fff;
   }
 </style>

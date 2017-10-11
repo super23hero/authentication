@@ -32,6 +32,7 @@
 
   .introduction__text {
     padding: 1rem 0;
+    color: #1f6d00;
   }
 
   .introduction__img-container {

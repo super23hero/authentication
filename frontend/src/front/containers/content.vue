@@ -15,9 +15,11 @@
 
 <style>
   .content {
-    width: 1040px;
+    width: 75%;
     margin: auto;
     margin-top: -5rem;
-    background-color: green;
+    background-color: #ebe9e0;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    border-radius: 1px;
   }
 </style>
