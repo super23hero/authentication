@@ -1,5 +1,8 @@
 import 'normalize.css';
 require('../node_modules/font-awesome/scss/font-awesome.scss');
+require('../node_modules/jquery/dist/jquery.slim.min');
+require('../node_modules/popper.js/dist/popper.min');
+require('../node_modules/bootstrap/dist/js/bootstrap.min');
 require('../node_modules/bootstrap/scss/bootstrap.scss');
 
 import Vue from 'vue'

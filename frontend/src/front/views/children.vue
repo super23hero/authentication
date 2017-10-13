@@ -25,7 +25,7 @@
 
 <script>
   export default {
-    name: 'adopt',
+    name: 'children',
     mounted() {
       console.log('Component mounted.')
     }

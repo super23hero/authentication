@@ -1,9 +1,9 @@
 <template>
   <div class="manager">
-    <manager-menu v-show="matched"></manager-menu>
-    <manager-content>
+      <manager-menu v-show="matched"></manager-menu>
+      <manager-content>
         <router-view name="managerRouter"></router-view>
-    </manager-content>
+      </manager-content>
   </div>
 </template>
 

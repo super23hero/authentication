@@ -7,7 +7,7 @@ import {Auth as Auth} from './core/Auth';
 import Front from './front/front.vue'
 import Home from './front/views/home.vue'
 import PreviousYears from './front/views/previous-years.vue'
-import Adopt from './front/views/adopt.vue'
+import Children from './front/views/children.vue'
 
 /*
 * MANAGER
@@ -43,9 +43,9 @@ let routes = [
                 }
             },
             {
-                path: 'adotar',
+                path: 'criancas',
                 components: {
-                  frontRouter: Adopt,
+                  frontRouter: Children,
                 }
             }
         ]
@@ -100,11 +100,11 @@ let router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    let pathSplitted = to.path.split('/');
-    if(pathSplitted[1] === 'admin' && pathSplitted[2] !== 'login' && !Auth.checkAuth()) {
-        next(false);
-        router.push('/admin/login');
-    }
+    // let pathSplitted = to.path.split('/');
+    // if(pathSplitted[1] === 'admin' && pathSplitted[2] !== 'login' && !Auth.checkAuth()) {
+    //     next(false);
+    //     router.push('/admin/login');
+    // }
 
     next();
 });
