@@ -1,27 +1,52 @@
 <template>
-    <div>
-      <h1>Users List</h1>
-      <div class="datatable-counter">
-        15 modelos de fluxo | 5 abertos | 0 fechados
-      </div>
-      <table class="datatable">
-        <thead class="datatable__header">
+    <section>
+      <h2 class="d-flex pb-3 pt-3 justify-content-between">
+        Usuários
+        <router-link to="/admin/users/new" tag="a">
+          <button type="button" class="btn btn-primary">Novo</button>
+        </router-link>
+      </h2>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
           <tr>
             <th v-for="columnName in header">{{columnName}}</th>
             <th>Ações</th>
           </tr>
-        </thead>
-        <tbody class="datatable__body">
-          <tr class="animated fadeIn" v-for="user in userList">
-            <td data-title="ID">{{user._id}}</td>
-            <td data-title="Nome">{{user.name}}</td>
+          </thead>
+          <tbody>
+          <tr v-for="user in userList">
+            <td>{{user._id}}</td>
+            <td>{{user.name}}</td>
             <td>
-              <button class="datatable__delete-btn" @click="deleteUser(user._id)"><i class="fa fa-trash"></i></button>
+              <router-link :to="'/admin/users/'+user._id" tag="a">
+                <button type="button" class="btn btn-secondary"><i class="fa fa-pencil"></i></button>
+              </router-link>
+              <button type="button" class="btn btn-outline-danger" @click="deleteUser(user._id)"><i class="fa fa-trash"></i></button>
             </td>
           </tr>
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+      <div class="table-counter">
+        {{userList.length}} de {{userList.length}}
+      </div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
 </template>
 
 <script>

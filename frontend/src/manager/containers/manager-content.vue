@@ -1,6 +1,8 @@
 <template>
   <div class="manager__content">
-    <slot></slot>
+    <div class="container">
+      <slot></slot>
+    </div>
   </div>
 </template>
 

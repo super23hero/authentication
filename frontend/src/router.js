@@ -100,11 +100,11 @@ let router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    // let pathSplitted = to.path.split('/');
-    // if(pathSplitted[1] === 'admin' && pathSplitted[2] !== 'login' && !Auth.checkAuth()) {
-    //     next(false);
-    //     router.push('/admin/login');
-    // }
+    let pathSplitted = to.path.split('/');
+    if(pathSplitted[1] === 'admin' && pathSplitted[2] !== 'login' && !Auth.checkAuth()) {
+        next(false);
+        router.push('/admin/login');
+    }
 
     next();
 });
