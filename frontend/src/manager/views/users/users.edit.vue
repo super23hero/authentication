@@ -1,43 +1,45 @@
 <template>
-  <div>
-    <h1>Users Edit</h1>
-    <form method="POST" @submit.prevent="editUser" @keydown="form.errors.clear($event.target.name)">
-      <div class="control">
-        <label for="name" class="label">Nome:</label>
-        <input type="text" id="name" name="name" class="input" v-model="form.name">
-        <span class="help is-danger" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
+  <section>
+    <h2 class="d-flex pb-3 pt-3 justify-content-between">
+      Editar Usuário
+      <router-link to="/admin/users" tag="a">
+        <button type="button" class="btn btn-link">Voltar</button>
+      </router-link>
+    </h2>
+    <form @submit.prevent="editUser" @keydown="form.errors.clear($event.target.name)">
+      <div class="form-group">
+        <label for="name">Nome:</label>
+        <input v-model="form.name" type="text" id="name" name="name" class="form-control" placeholder="Digite seu nome">
+        <small class="invalid-feedback" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></small>
       </div>
 
-      <div class="control">
-        <label for="email" class="label">Email:</label>
-        <input type="text" id="email" name="email" class="input" v-model="form.email">
-        <span class="help is-danger" v-if="form.errors.has('email')" v-text="form.errors.get('email')"></span>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input v-model="form.email" type="text" id="email" name="email" class="form-control" placeholder="Digite seu e-mail">
+        <span class="invalid-feedback" v-if="form.errors.has('email')" v-text="form.errors.get('email')"></span>
       </div>
 
-      <div class="control">
-        <label for="username" class="label">Username:</label>
-        <input type="text" id="username" name="username" class="input" v-model="form.username">
-        <span class="help is-danger" v-if="form.errors.has('username')" v-text="form.errors.get('username')"></span>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input v-model="form.username" type="text" id="username" name="username" class="form-control" placeholder="Digite seu nome de usuário">
+        <span class="invalid-feedback" v-if="form.errors.has('username')" v-text="form.errors.get('username')"></span>
       </div>
 
-      <div class="control">
-        <label for="oldPassword" class="label">Senha antiga:</label>
-        <input type="password" id="oldPassword" name="oldPassword" class="input" v-model="form.oldPassword">
-        <span class="help is-danger" v-if="form.errors.has('oldPassword')" v-text="form.errors.get('oldPassword')"></span>
+      <div class="form-group">
+        <label for="password">Senha antiga:</label>
+        <input v-model="form.oldPassword" type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+        <span class="invalid-feedback" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
       </div>
 
-      <div class="control">
-        <label for="newPassword" class="label">Nova senha:</label>
-        <input type="password" id="newPassword" name="newPassword" class="input" v-model="form.newPassword">
-        <span class="help is-danger" v-if="form.errors.has('newPassword')" v-text="form.errors.get('newPassword')"></span>
+      <div class="form-group">
+        <label for="password">Nova senha:</label>
+        <input v-model="form.newPassword" type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+        <span class="invalid-feedback" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
       </div>
 
-      <div class="control">
-        <button class="button is-primary" :disabled="form.errors.any()">Create</button>
-      </div>
-
+      <button type="submit" class="btn btn-primary" :disabled="form.errors.any()">Enviar</button>
     </form>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -63,11 +65,16 @@
       }
     },
     created() {
-      let userRetrieved = this.requestService.retrieve('users', this.userId);
+      this.requestService
+        .retrieve('users', this.userId)
+        .then(response => {
+        	let userRetrieved = response.data;
+          this.form.name = userRetrieved.name;
+          this.form.email = userRetrieved.email;
+          this.form.username = userRetrieved.username;
+        });
 
-      this.form.name = userRetrieved.name;
-      this.form.email = userRetrieved.email;
-      this.form.username = userRetrieved.username;
+
     },
     methods: {
       editUser() {
