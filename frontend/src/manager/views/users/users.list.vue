@@ -7,6 +7,16 @@
         </router-link>
       </h2>
 
+      <button id="show-modal" @click="showModal = true">Show Modal</button>
+      <!-- use the modal component, pass in the prop -->
+      <modal v-if="showModal" @close="showModal = false">
+        <!--
+          you can use custom content here to overwrite
+          default content
+        -->
+        <h3 slot="header">custom header</h3>
+      </modal>
+
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
@@ -51,10 +61,12 @@
 
 <script>
     import RequestService from '../../../core/RequestService'
+    import modal from '../../components/modal.vue'
 
     export default {
         name: 'usersList',
         components: {
+          modal
         },
         data() {
             return {
@@ -63,7 +75,8 @@
                 header: [
                   'ID',
                 	'Nome',
-                ]
+                ],
+              showModal: false
             }
         },
         methods: {
