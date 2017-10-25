@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/involvestecnologia/adoteonatal.svg?branch=master)](https://travis-ci.org/involvestecnologia/adoteonatal)
-[![Code Climate](https://codeclimate.com/github/involvestecnologia/adoteonatal/badges/gpa.svg)](https://codeclimate.com/github/involvestecnologia/adoteonatal)
-[![Test Coverage](https://codeclimate.com/github/involvestecnologia/adoteonatal/badges/coverage.svg)](https://codeclimate.com/github/involvestecnologia/adoteonatal/coverage)
-[![Dependency Status](https://david-dm.org/involvestecnologia/adoteonatal/status.svg)](https://david-dm.org/involvestecnologia/adoteonatal#info=dependencies)
-[![devDependency Status](https://david-dm.org/involvestecnologia/adoteonatal/dev-status.svg)](https://david-dm.org/involvestecnologia/adoteonatal#info=devDependencies)
+[![Build Status](https://travis-ci.org/hmpedro/adoteonatal.svg?branch=master)](https://travis-ci.org/involvestecnologia/adoteonatal)
+[![Code Climate](https://codeclimate.com/github/hmpedro/adoteonatal/badges/gpa.svg)](https://codeclimate.com/github/hmpedro/adoteonatal)
+[![Test Coverage](https://codeclimate.com/github/hmpedro/adoteonatal/badges/coverage.svg)](https://codeclimate.com/github/hmpedro/adoteonatal/coverage)
+[![Dependency Status](https://david-dm.org/hmpedro/adoteonatal/status.svg)](https://david-dm.org/involvestecnologia/adoteonatal#info=dependencies)
+[![devDependency Status](https://david-dm.org/hmpedro/adoteonatal/dev-status.svg)](https://david-dm.org/involvestecnologia/adoteonatal#info=devDependencies)
 
 # Adote o Natal
 Be the Santa Claus who need.
