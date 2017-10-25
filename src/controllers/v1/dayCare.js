@@ -5,18 +5,21 @@ const DayCareService = require('../../services/v1/dayCare');
 const DayCareController = {
 
   /**
-   * @api {get} /v1/day-care/ List day cares
-   * @apiVersion 1.0.0
+   * @api {get} /v1/day-cares/ List day cares
+   * @apiVersion 0.1.0
    * @apiName ListDayCares
    * @apiGroup DayCare
-   * @apiPermission admin
+   * @apiPermission users
    *
    * @apiDescription Lists all day cares.
    *
    * @apiExample Example usage:
    * curl -i http://localhost:3000/v1/day-cares
    *
-   * @apiSuccess {Object[]} dayCares Array of day cares.
+   * @apiSuccess {Object[]} data
+   * @apiSuccess {String} data._id
+   * @apiSuccess {String} data.name
+   * @apiSuccess {Date} data.creation_date
    */
   list: async (req, res, next) => {
     debug('list action');
@@ -31,7 +34,7 @@ const DayCareController = {
         skip: Number(skip) || null,
         sort,
       });
-      res.status(200).send(dayCares);
+      res.status(200).send({ data: dayCares });
     } catch (err) {
       next(err);
     }

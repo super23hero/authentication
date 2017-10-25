@@ -146,7 +146,7 @@ suite('Day Cares', () => {
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
-      res.body.should.be.an('array');
+      res.body.data.should.be.an('array');
     });
   });
 });

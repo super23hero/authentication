@@ -7,8 +7,7 @@ const DayCare = require('../../models/v1/dayCare');
 const DayCareService = {
 
   /**
-   *
-   * @return {Promise|Array|{index: number, input: string}|*}
+   * @returns {Promise|Array|{_id: String, name: String, creation_date: Date}|*}
    */
   list: (query) => {
     debug('listing day cares');

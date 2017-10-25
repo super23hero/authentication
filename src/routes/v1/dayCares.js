@@ -11,8 +11,8 @@ const DayCareController = require('../../controllers/v1/dayCare');
 router.use(AuthMiddleware.isAuthenticated);
 
 router.route('/')
-  .get(AuthMiddleware.isAdmin, DayCareController.list)
-  .post(AuthMiddleware.isAdmin, DayCareController.create);
+  .get(DayCareController.list)
+  .post(DayCareController.create);
 
 router.route('/:id')
   .get(DayCareController.findById)
