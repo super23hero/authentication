@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/hmpedro/adoteonatal.svg?branch=master)](https://travis-ci.org/involvestecnologia/adoteonatal)
+[![Build Status](https://travis-ci.org/adoteonatal/adoteonatal.svg?branch=master)](https://travis-ci.org/adoteonatal/adoteonatal)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5e389b4b523e866df4e6/maintainability)](https://codeclimate.com/github/adoteonatal/adoteonatal/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5e389b4b523e866df4e6/test_coverage)](https://codeclimate.com/github/adoteonatal/adoteonatal/test_coverage)
-[![Dependency Status](https://david-dm.org/hmpedro/adoteonatal/status.svg)](https://david-dm.org/involvestecnologia/adoteonatal#info=dependencies)
-[![devDependency Status](https://david-dm.org/hmpedro/adoteonatal/dev-status.svg)](https://david-dm.org/involvestecnologia/adoteonatal#info=devDependencies)
+[![Dependency Status](https://david-dm.org/adoteonatal/adoteonatal/status.svg)](https://david-dm.org/adoteonatal/adoteonatal#info=dependencies)
+[![devDependency Status](https://david-dm.org/adoteonatal/adoteonatal/dev-status.svg)](https://david-dm.org/adoteonatal/adoteonatal#info=devDependencies)
 
 # Adote o Natal
 Be the Santa Claus who need.
