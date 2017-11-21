@@ -1,6 +1,7 @@
 const debug = require('debug')('app:services:v1:user');
 const _ = require('lodash');
 const uuidv4 = require('uuid/v4');
+const moment = require('moment');
 
 const Token = require('../../models/v1/token');
 
@@ -25,6 +26,7 @@ const TokenService = {
 
     const token = new Token({ user });
     token.value = uuidv4(256);
+    token.expiry_date = moment().add(7, 'days').toDate();
     await token.save();
     return token;
   },

@@ -1,4 +1,5 @@
 const debug = require('debug')('app:services:v1:auth');
+const moment = require('moment');
 
 const UserService = require('../../services/v1/user');
 const UnauthorizedError = require('../../errors/unauthorized');
@@ -35,6 +36,11 @@ const AuthService = {
 
     token = await TokenService.findOne({ value: token, active: true });
     if (!token) throw new UnauthorizedError('Invalid token');
+    if (moment(token.expiry_date).isBefore(new Date())) {
+      token.active = false;
+      await token.save();
+      throw new UnauthorizedError('Expired token');
+    }
 
     await token.populate('user').execPopulate();
 
