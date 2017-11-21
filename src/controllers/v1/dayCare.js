@@ -24,16 +24,10 @@ const DayCareController = {
   list: async (req, res, next) => {
     debug('list action');
 
-    const { fields, limit, skip, sort } = req.params;
-
     try {
-      const dayCares = await DayCareService.list({
-        criteria: {},
-        fields,
-        limit: Number(limit) || null,
-        skip: Number(skip) || null,
-        sort,
-      });
+      const dayCares = await DayCareService.list(Object.assign({
+        criteria: req.query,
+      }, req.headers));
       res.status(200).send({ data: dayCares });
     } catch (err) {
       next(err);

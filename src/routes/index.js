@@ -3,11 +3,14 @@ const express = require('express');
 
 debug('configuring routes');
 
+const GeneralMiddleware = require('../middlewares/general');
 const ErrorsMiddleware = require('../middlewares/errors');
 const HealthyCheckController = require('../controllers/healthyCheck');
 const v1 = require('./v1');
 
 const router = express.Router();
+
+router.use(GeneralMiddleware());
 
 // Healthy check
 router.get('/', HealthyCheckController.index);

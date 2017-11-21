@@ -1,28 +1,17 @@
-/*
 const chai = require('chai');
 const request = require('supertest');
 const faker = require('faker');
 
-chai.should();
-
-const app = require('../../../../src/app');
-const statusHandler = require('../../../../src/config/statusHandler');
+const server = require('../../../fixture/server');
 const { getToken } = require('./auth.helper');
 
-// Setup
+chai.should();
+
+let instance;
 let token = '';
 
 before(async () => {
-  if (statusHandler.getStatus() === statusHandler.STATUSES.READY) {
-    return;
-  }
-  if (statusHandler.getStatus() === statusHandler.STATUSES.ERR) {
-    throw new Error('Application crashed');
-  }
-  await new Promise((resolve, reject) => {
-    app.on('ready', resolve);
-    app.on('error', reject);
-  });
+  instance = await server();
 });
 
 beforeEach(async () => {
@@ -34,7 +23,7 @@ suite('Day Cares', () => {
     test('should create a new day care', async () => {
       const name = faker.internet.userName();
 
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .send({ name })
@@ -47,13 +36,13 @@ suite('Day Cares', () => {
     test('should fail to create a new day care when name is duplicated', async () => {
       const name = faker.internet.userName();
 
-      await request(app)
+      await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .send({ name })
         .expect(201);
 
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .send({ name })
@@ -64,7 +53,7 @@ suite('Day Cares', () => {
     });
 
     test('should fail to create a new day care when name is undefined', async () => {
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .send({})
@@ -75,7 +64,7 @@ suite('Day Cares', () => {
     });
 
     test('should fail to create a new day care when name is blank', async () => {
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .send({ name: ' ' })
@@ -90,13 +79,13 @@ suite('Day Cares', () => {
     test('should delete an day care', async () => {
       const name = faker.internet.userName();
 
-      const dayCareInsert = await request(app)
+      const dayCareInsert = await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .send({ name })
         .expect(201);
 
-      const res = await request(app)
+      const res = await request(instance)
         .delete(`/v1/day-cares/${dayCareInsert.body._id}`)
         .set('Authorization', `Bearer ${token}`)
         .expect(204);
@@ -107,7 +96,7 @@ suite('Day Cares', () => {
     });
 
     test('should succeed even when day care does not exist', async () => {
-      const res = await request(app)
+      const res = await request(instance)
         .delete('/v1/day-cares/598ce31fd826193bbe675726')
         .set('Authorization', `Bearer ${token}`)
         .expect(204);
@@ -123,13 +112,13 @@ suite('Day Cares', () => {
       const expectName = faker.internet.userName();
       const name = faker.internet.userName();
 
-      const dayCareInsert = await request(app)
+      const dayCareInsert = await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .send({ name })
         .expect(201);
 
-      const res = await request(app)
+      const res = await request(instance)
         .put(`/v1/day-cares/${dayCareInsert.body._id}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ name: expectName })
@@ -142,7 +131,7 @@ suite('Day Cares', () => {
 
   suite('#list', () => {
     test('should return an array list with Day Cares', async () => {
-      const res = await request(app)
+      const res = await request(instance)
         .get('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
@@ -151,4 +140,3 @@ suite('Day Cares', () => {
     });
   });
 });
-*/
