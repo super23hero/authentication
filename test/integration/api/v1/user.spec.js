@@ -96,7 +96,8 @@ suite('Users', () => {
         .expect(500);
 
       res.body.should.be.an('object');
-      res.body.error.should.be.equal('ValidationError: username: User [username] field is required');
+      res.body.error.should.be
+      .equal('ValidationError: username: User [username] field is required');
     });
 
     test('should fail to create a new user when password is undefined', async () => {
@@ -111,7 +112,9 @@ suite('Users', () => {
         .expect(500);
 
       res.body.should.be.an('object');
-      res.body.error.should.be.equal('ValidationError: salt: Path `salt` is required., hashed_password: User [password] field is required');
+      res.body.error.should.be
+      .equal('ValidationError: salt: Path
+      `salt` is required., hashed_password: User [password] field is required');
     });
 
     test('should fail to create a new user when name is blank', async () => {
