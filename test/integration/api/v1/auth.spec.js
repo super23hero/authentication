@@ -1,37 +1,29 @@
-/*
 const chai = require('chai');
 const request = require('supertest');
 const faker = require('faker');
 
+const server = require('../../../fixture/server');
+
 chai.should();
 
-const app = require('../../../../src/app');
-const statusHandler = require('../../../../src/config/statusHandler');
-const { auth } = require('./auth.helper');
+let instance;
 
 before(async () => {
-  if (statusHandler.getStatus() === statusHandler.STATUSES.READY) {
-    return;
-  }
-  if (statusHandler.getStatus() === statusHandler.STATUSES.ERR) {
-    throw new Error('Application crashed');
-  }
-  await new Promise((resolve, reject) => {
-    app.on('ready', resolve);
-    app.on('error', reject);
-  });
+  instance = await server();
 });
+
+const authHelper = require('./auth.helper');
 
 suite('Auth', () => {
   suite('#token', () => {
     test('should authenticate and return the authenticated token', async () => {
-      const res = await auth();
+      const res = await authHelper.auth();
       res.body.should.be.an('object');
       res.body.token.should.be.a('string');
     });
 
     test('should fail to authenticate with an invalid username', async () => {
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/auth')
         .send({ username: faker.random.word(), password: faker.random.word() })
         .expect(401);
@@ -41,4 +33,3 @@ suite('Auth', () => {
     });
   });
 });
-*/

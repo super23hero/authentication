@@ -11,7 +11,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "eslint": "eslint . --ext .js",
-    "test": "cross-env NODE_ENV=test mocha --ui tdd -t 5000 --exit test/**/*.spec.js",
+    "test": "cross-env NODE_ENV=test mocha -t 10000 --ui tdd --exit test/**/*.spec.js",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=html --reporter=lcov npm test",
     "docs": "apidoc -i src/controllers -o doc/"
   },

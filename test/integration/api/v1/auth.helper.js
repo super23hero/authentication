@@ -1,7 +1,9 @@
 const request = require('supertest');
-const app = require('../../../../src/app');
+
+const server = require('../../../fixture/server');
 
 let globalToken = '';
+let isAuthenticated = false;
 
 exports.getToken = async (username = 'involves', password = 'admin') => {
   if (globalToken) return globalToken;
@@ -11,11 +13,15 @@ exports.getToken = async (username = 'involves', password = 'admin') => {
 };
 
 exports.auth = async (username = 'involves', password = 'admin') => {
+  const app = await server();
   const res = await request(app)
     .post('/v1/auth')
     .send({ username, password })
     .expect(200);
 
   globalToken = res.body.token;
+  isAuthenticated = true;
   return res;
 };
+
+exports.isAuthenticated = isAuthenticated;
