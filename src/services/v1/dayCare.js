@@ -3,6 +3,7 @@ const _ = require('lodash');
 
 const NotFoundError = require('../../errors/notFound');
 const DayCare = require('../../models/v1/dayCare');
+const { transformCriteriaToObject } = require('../utils');
 
 const DayCareService = {
 
@@ -14,13 +15,7 @@ const DayCareService = {
 
     const { criteria, fields, limit, skip, sort } = query;
 
-    const findCriteria = criteria.split(',').reduce((acc, cur) => {
-      const keyValueArray = cur.split(':');
-      acc[keyValueArray[0]] = keyValueArray[1];
-      return acc;
-    }, {});
-
-    return DayCare.find(findCriteria, fields)
+    return DayCare.find(transformCriteriaToObject(criteria), fields)
       .limit(limit)
       .skip(skip)
       .sort(sort)
