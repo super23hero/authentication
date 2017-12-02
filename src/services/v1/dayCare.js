@@ -14,7 +14,13 @@ const DayCareService = {
 
     const { criteria, fields, limit, skip, sort } = query;
 
-    return DayCare.find(criteria, fields)
+    const findCriteria = criteria.split(',').reduce((acc, cur) => {
+      const keyValueArray = cur.split(':');
+      acc[keyValueArray[0]] = keyValueArray[1];
+      return acc;
+    }, {});
+
+    return DayCare.find(findCriteria, fields)
       .limit(limit)
       .skip(skip)
       .sort(sort)
@@ -78,7 +84,6 @@ const DayCareService = {
    */
   delete: async (id) => {
     debug(`deleting day care "${id}"`);
-
     return DayCare.remove({ _id: id }).exec();
   },
 

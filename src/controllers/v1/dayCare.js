@@ -25,9 +25,7 @@ const DayCareController = {
     debug('list action');
 
     try {
-      const dayCares = await DayCareService.list(Object.assign({
-        criteria: req.query,
-      }, req.headers));
+      const dayCares = await DayCareService.list(req.query);
       res.status(200).send({ data: dayCares });
     } catch (err) {
       next(err);

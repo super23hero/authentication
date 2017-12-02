@@ -4,9 +4,7 @@
   "license": "MIT",
   "private": true,
   "author": {
-    "name": "Involves",
-    "email": "",
-    "url": ""
+    "name": "Pedro Henrique & Daniel Kuroski"
   },
   "scripts": {
     "start": "nodemon ./bin/www",
