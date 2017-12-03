@@ -1,4 +1,4 @@
-const debug = require('debug')('app:controllers:v1:environment');
+const debug = require('debug')('app:controllers:v1:users');
 
 const UserService = require('../../services/v1/user');
 
@@ -9,7 +9,7 @@ const UserController = {
    * @apiVersion 1.0.0
    * @apiName ListUsers
    * @apiGroup User
-   * @apiPermission admin
+   * @apiPermission user
    *
    * @apiDescription Lists all users.
    *
@@ -21,16 +21,8 @@ const UserController = {
   list: async (req, res, next) => {
     debug('list action');
 
-    const { fields, limit, skip, sort } = req.params;
-
     try {
-      const users = await UserService.list({
-        criteria: {},
-        fields,
-        limit: Number(limit) || null,
-        skip: Number(skip) || null,
-        sort,
-      });
+      const users = await UserService.list(req.query);
       res.status(200).send(users);
     } catch (err) {
       next(err);
@@ -57,7 +49,7 @@ const UserController = {
    * @apiSuccess  {String}  _id             User id.
    * @apiSuccess  {String}  name            User name.
    * @apiSuccess  {String}  username        User username.
-   * @apiSuccess  {String}  password        User password.
+   * @apiSuccess  {String}  hashed_password        User password.
    * @apiSuccess  {Boolean} isAdmin         User is admin.
    * @apiSuccess  {String}  creation_date   User creation date.
    */
@@ -95,7 +87,7 @@ const UserController = {
    * @apiSuccess  {String}  _id             User id.
    * @apiSuccess  {String}  name            User name.
    * @apiSuccess  {String}  username        User username.
-   * @apiSuccess  {String}  password        User password.
+   * @apiSuccess  {String}  hashed_password        User password.
    * @apiSuccess  {Boolean} isAdmin         User is admin.
    * @apiSuccess  {String}  creation_date   User creation date.
    */

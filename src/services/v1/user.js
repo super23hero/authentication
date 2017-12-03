@@ -4,6 +4,7 @@ const _ = require('lodash');
 const UnauthorizedError = require('../../errors/unauthorized');
 const NotFoundError = require('../../errors/notFound');
 const User = require('../../models/v1/user');
+const { transformCriteriaToObject } = require('../utils');
 
 const UserService = {
 
@@ -16,7 +17,7 @@ const UserService = {
 
     const { criteria, fields, limit, skip, sort } = query;
 
-    return User.find(criteria, fields)
+    return User.find(transformCriteriaToObject(criteria), fields)
       .limit(limit)
       .skip(skip)
       .sort(sort)

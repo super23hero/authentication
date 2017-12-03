@@ -4,6 +4,16 @@ const server = require('../../../fixture/server');
 
 let globalToken = '';
 
+exports.getUserToken = async (username = 'involves', password = 'admin') => {
+  const app = await server();
+  const res = await request(app)
+    .post('/v1/auth')
+    .send({ username, password })
+    .expect(200);
+
+  return res.body.token;
+};
+
 exports.getToken = async (username = 'involves', password = 'admin') => {
   if (globalToken) return globalToken;
   const res = await this.auth(username, password);
