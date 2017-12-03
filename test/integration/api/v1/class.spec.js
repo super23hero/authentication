@@ -46,7 +46,7 @@ suite('Classes', () => {
 
       res.body.should.be.an('object');
       res.body.error
-      .should.be.equal('ValidationError: day_care: Class [day_care] field is required');
+        .should.be.equal('ValidationError: day_care: Class [day_care] field is required');
     });
 
     test('should fail to create a new class when name is undefined', async () => {
