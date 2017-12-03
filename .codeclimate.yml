@@ -12,3 +12,11 @@ ratings:
   - 'src/**'
   - 'bin/**'
   - 'test/**'
+exclude_patterns:
+- "doc/**"
+- "frontend/**"
+- "doc/**"
+- "**.md"
+- "yarn.lock"
+- "package.json"
+- "node_modules"
