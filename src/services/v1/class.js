@@ -3,6 +3,7 @@ const _ = require('lodash');
 
 const NotFoundError = require('../../errors/notFound');
 const ClassSchema = require('../../models/v1/class');
+const { transformCriteriaToObject } = require('../utils');
 
 const ClassService = {
 
@@ -15,7 +16,7 @@ const ClassService = {
 
     const { criteria, fields, limit, skip, sort } = query;
 
-    return ClassSchema.find(criteria, fields)
+    return ClassSchema.find(transformCriteriaToObject(criteria), fields)
       .limit(limit)
       .skip(skip)
       .sort(sort)
@@ -37,10 +38,10 @@ const ClassService = {
    * @return {Promise}
    */
   findById: async (id) => {
-    debug(`retrieving day care "${id}"`);
+    debug(`retrieving class "${id}"`);
 
     const entity = await ClassSchema.findOne({ _id: id }).exec();
-    if (!entity) throw new NotFoundError(`day care "${id}" not found`);
+    if (!entity) throw new NotFoundError(`class "${id}" not found`);
 
     return entity.populate('day_care').execPopulate();
   },
@@ -51,7 +52,7 @@ const ClassService = {
    * @return {Promise.<void>}
    */
   create: async (body) => {
-    debug(`creating day care "${body.name}"`);
+    debug(`creating class "${body.name}"`);
 
     const entity = new ClassSchema(body);
     await entity.save();
@@ -65,7 +66,7 @@ const ClassService = {
    * @return {Promise.<*|Promise>}
    */
   update: async (id, body) => {
-    debug(`updating day care "${id}"`);
+    debug(`updating class "${id}"`);
 
     const entity = await ClassService.findById(id);
     await _.merge(entity, body).save();

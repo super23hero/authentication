@@ -1,0 +1,441 @@
+{
+	"info": {
+		"name": "Adote o natal",
+		"_postman_id": "9f2d9cef-76e5-4633-a127-2aaf137f6f5f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Children",
+			"description": "",
+			"item": [
+				{
+					"name": "Children - GetAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3ade2f53-7ac9-4b73-a686-ff0364176023",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": ""
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/v1/children",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"children"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Children - Insert",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3ade2f53-7ac9-4b73-a686-ff0364176023",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Daniel",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "nickname",
+									"value": "Kuroski",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "sex",
+									"value": "m",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "26",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "toy.status",
+									"value": "willReceive",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "toy.wish",
+									"value": "Zelda",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "cloth.status",
+									"value": "willReceive",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "cloth.size",
+									"value": "M",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "shoe.status",
+									"value": "willReceive",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "shoe.size",
+									"value": "41",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "class",
+									"value": "59ed34568475151f4a1c155d",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "https://www.neolutionesport.com/wp-content/uploads/2017/03/default-avatar-knives-ninja.png",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/children",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"children"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Classes",
+			"description": "",
+			"item": [
+				{
+					"name": "Classes - Insert",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "26c7923b-fee1-41aa-966c-53c971fce18a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Raio de sol",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "day_care",
+									"value": "5a2300519d573408bc177b98",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/classes",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"classes"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Classes - List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "26c7923b-fee1-41aa-966c-53c971fce18a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Encanto",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "day_care",
+									"value": "5a2300519d573408bc177b98",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/classes",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"classes"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DayCares",
+			"description": "",
+			"item": [
+				{
+					"name": "DayCares - Insert",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2c52315a-346d-4806-ab62-908f47b70e49",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Energia",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/day-cares",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"day-cares"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DayCares - Edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "26c7923b-fee1-41aa-966c-53c971fce18a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Salesiano 2",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/day-cares/5a2300519d573408bc177b98",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"day-cares",
+								"5a2300519d573408bc177b98"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DayCares - List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "26c7923b-fee1-41aa-966c-53c971fce18a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/v1/day-cares",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"day-cares"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "involves",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/v1/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"auth"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

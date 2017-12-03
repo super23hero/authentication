@@ -11,8 +11,8 @@ const ClassController = require('../../controllers/v1/class');
 router.use(AuthMiddleware.isAuthenticated);
 
 router.route('/')
-  .get(AuthMiddleware.isAdmin, ClassController.list)
-  .post(AuthMiddleware.isAdmin, ClassController.create);
+  .get(ClassController.list)
+  .post(ClassController.create);
 
 router.route('/:id')
   .get(ClassController.findById)

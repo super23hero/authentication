@@ -1,28 +1,17 @@
-/*
 const chai = require('chai');
 const request = require('supertest');
 const faker = require('faker');
 
-chai.should();
-
-const app = require('../../../../src/app');
-const statusHandler = require('../../../../src/config/statusHandler');
+const server = require('../../../fixture/server');
 const { getToken } = require('./auth.helper');
 
-// Setup
+chai.should();
+
+let instance;
 let token = '';
 
 before(async () => {
-  if (statusHandler.getStatus() === statusHandler.STATUSES.READY) {
-    return;
-  }
-  if (statusHandler.getStatus() === statusHandler.STATUSES.ERR) {
-    throw new Error('Application crashed');
-  }
-  await new Promise((resolve, reject) => {
-    app.on('ready', resolve);
-    app.on('error', reject);
-  });
+  instance = await server();
 });
 
 beforeEach(async () => {
@@ -35,7 +24,7 @@ suite('Classes', () => {
       const name = faker.internet.userName();
       const dayCare = '59c6a58534a4050de012f617';
 
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/classes')
         .set('Authorization', `Bearer ${token}`)
         .send({ name, day_care: dayCare })
@@ -49,7 +38,7 @@ suite('Classes', () => {
     test('should fail to create a new class when day_care is undefined', async () => {
       const name = faker.internet.userName();
 
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/classes')
         .set('Authorization', `Bearer ${token}`)
         .send({ name })
@@ -63,7 +52,7 @@ suite('Classes', () => {
     test('should fail to create a new class when name is undefined', async () => {
       const dayCare = '59c6a58534a4050de012f617';
 
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/classes')
         .set('Authorization', `Bearer ${token}`)
         .send({ day_care: dayCare })
@@ -76,7 +65,7 @@ suite('Classes', () => {
     test('should fail to create a new class when name is blank', async () => {
       const dayCare = '59c6a58534a4050de012f617';
 
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/classes')
         .set('Authorization', `Bearer ${token}`)
         .send({ name: ' ', day_care: dayCare })
@@ -92,13 +81,13 @@ suite('Classes', () => {
       const name = faker.internet.userName();
       const dayCare = '59c6a58534a4050de012f617';
 
-      const classInsert = await request(app)
+      const classInsert = await request(instance)
         .post('/v1/classes')
         .set('Authorization', `Bearer ${token}`)
         .send({ name, day_care: dayCare })
         .expect(201);
 
-      const res = await request(app)
+      const res = await request(instance)
         .delete(`/v1/classes/${classInsert.body._id}`)
         .set('Authorization', `Bearer ${token}`)
         .expect(204);
@@ -109,7 +98,7 @@ suite('Classes', () => {
     });
 
     test('should succeed even when class does not exist', async () => {
-      const res = await request(app)
+      const res = await request(instance)
         .delete('/v1/classes/598ce31fd826193bbe675726')
         .set('Authorization', `Bearer ${token}`)
         .expect(204);
@@ -125,19 +114,19 @@ suite('Classes', () => {
       const expectName = faker.internet.userName();
       const name = faker.internet.userName();
 
-      const dayCareInsert = await request(app)
+      const dayCareInsert = await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
         .send({ name })
         .expect(201);
 
-      const classInsert = await request(app)
+      const classInsert = await request(instance)
         .post('/v1/classes')
         .set('Authorization', `Bearer ${token}`)
         .send({ name, day_care: dayCareInsert.body._id })
         .expect(201);
 
-      const res = await request(app)
+      const res = await request(instance)
         .put(`/v1/classes/${classInsert.body._id}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ name: expectName })
@@ -150,13 +139,12 @@ suite('Classes', () => {
 
   suite('#list', () => {
     test('should return an array list with Day care Classes', async () => {
-      const res = await request(app)
+      const res = await request(instance)
         .get('/v1/classes')
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
-      res.body.should.be.an('array');
+      res.body.data.should.be.an('array');
     });
   });
 });
-*/

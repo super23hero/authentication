@@ -21,17 +21,9 @@ const ClassController = {
   list: async (req, res, next) => {
     debug('list action');
 
-    const { fields, limit, skip, sort } = req.params;
-
     try {
-      const classes = await ClassService.list({
-        criteria: {},
-        fields,
-        limit: Number(limit) || null,
-        skip: Number(skip) || null,
-        sort,
-      });
-      res.status(200).send(classes);
+      const classes = await ClassService.list(req.query);
+      res.status(200).send({ data: classes });
     } catch (err) {
       next(err);
     }
