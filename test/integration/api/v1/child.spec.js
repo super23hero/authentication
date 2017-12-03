@@ -1,90 +1,75 @@
-/*
 const chai = require('chai');
 const request = require('supertest');
 const faker = require('faker');
 
-chai.should();
-
-const app = require('../../../../src/app');
-const statusHandler = require('../../../../src/config/statusHandler');
+const server = require('../../../fixture/server');
 const { getToken } = require('./auth.helper');
 
-// Setup
+chai.should();
+
+let instance;
 let token = '';
+let childInstance = {};
 
 before(async () => {
-  if (statusHandler.getStatus() === statusHandler.STATUSES.READY) {
-    return;
-  }
-  if (statusHandler.getStatus() === statusHandler.STATUSES.ERR) {
-    throw new Error('Application crashed');
-  }
-  await new Promise((resolve, reject) => {
-    app.on('ready', resolve);
-    app.on('error', reject);
-  });
+  instance = await server();
 });
 
 beforeEach(async () => {
   token = await getToken();
+
+  childInstance.name = faker.internet.userName();
+  childInstance.nickname = faker.internet.userName();
+  childInstance.sex = 'm';
+  childInstance.age = faker.random.number();
+  childInstance.photo = faker.image.avatar();
+  childInstance.toy = {
+    status: 'willReceive',
+    wish: faker.random.word(),
+  };
+  childInstance.cloth = {
+    status: 'willReceive',
+    size: faker.random.word(),
+  };
+  childInstance.shoe = {
+    status: 'willReceive',
+    size: faker.random.word(),
+  };
+  childInstance.class = '59c6a58534a4050de012f617';
 });
 
 suite('Children', () => {
+  suite('#list', () => {
+    test('should return an array list with children', async () => {
+      const res = await request(instance)
+        .get('/v1/children')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200);
+
+      res.body.should.be.an('array');
+    });
+  });
+
   suite('#create', () => {
     test('should create a new child', async () => {
-      const name = faker.internet.userName();
-      const nickname = faker.internet.userName();
-      const sex = 'm';
-      const age = faker.random.number();
-      const photo = faker.image.avatar();
-      const toy = {
-        status: 'willReceive',
-        wish: faker.random.word(),
-      };
-      const cloth = {
-        status: 'willReceive',
-        size: faker.random.word(),
-      };
-      const shoe = {
-        status: 'willReceive',
-        size: faker.random.word(),
-      };
-      const classId = '59c6a58534a4050de012f617';
-
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/children')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, nickname, sex, age, photo, toy, cloth, shoe, class: classId })
+        .send(childInstance)
         .expect(201);
 
       res.body.should.be.an('object');
-      res.body.name.should.be.equal(name);
-      res.body.class.should.be.equal(classId);
+      res.body.name.should.be.equal(childInstance.name);
+      res.body.class.should.be.equal(childInstance.class);
     });
 
     test('should fail to create a new class when class is undefined', async () => {
-      const name = faker.internet.userName();
-      const nickname = faker.internet.userName();
-      const sex = 'm';
-      const age = faker.random.number();
-      const photo = faker.image.avatar();
-      const toy = {
-        status: 'willReceive',
-        wish: faker.random.word(),
-      };
-      const cloth = {
-        status: 'willReceive',
-        size: faker.random.word(),
-      };
-      const shoe = {
-        status: 'willReceive',
-        size: faker.random.word(),
-      };
+      childInstance.class = undefined;
 
-      const res = await request(app)
+      const res = await request(instance)
         .post('/v1/children')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, nickname, sex, age, photo, toy, cloth, shoe })
+        .send(childInstance)
         .expect(500);
 
       res.body.should.be.an('object');
@@ -92,95 +77,31 @@ suite('Children', () => {
     });
   });
 
-  suite('#delete', () => {
-    test('should delete an child', async () => {
-      const name = faker.internet.userName();
-      const nickname = faker.internet.userName();
-      const sex = 'm';
-      const age = faker.random.number();
-      const photo = faker.image.avatar();
-      const toy = {
-        status: 'willReceive',
-        wish: faker.random.word(),
-      };
-      const cloth = {
-        status: 'willReceive',
-        size: faker.random.word(),
-      };
-      const shoe = {
-        status: 'willReceive',
-        size: faker.random.word(),
-      };
-      const classId = '59c6a58534a4050de012f617';
-
-      const childInsert = await request(app)
-        .post('/v1/children')
-        .set('Authorization', `Bearer ${token}`)
-        .send({ name, nickname, sex, age, photo, toy, cloth, shoe, class: classId })
-        .expect(201);
-
-      const res = await request(app)
-        .delete(`/v1/children/${childInsert.body._id}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(204);
-
-      res.body
-        .should.be.an('object')
-        .that.is.empty;
-    });
-
-    test('should succeed even when class does not exist', async () => {
-      const res = await request(app)
-        .delete('/v1/children/598ce31fd826193bbe675726')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(204);
-
-      res.body
-        .should.be.an('object')
-        .that.is.empty;
-    });
-  });
-
   suite('#update', () => {
     test('should update an child with some variables', async () => {
       const expectName = faker.internet.userName();
-      const name = faker.internet.userName();
-      const nickname = faker.internet.userName();
-      const sex = 'm';
-      const age = faker.random.number();
-      const photo = faker.image.avatar();
-      const toy = {
-        status: 'willReceive',
-        wish: faker.random.word(),
-      };
-      const cloth = {
-        status: 'willReceive',
-        size: faker.random.word(),
-      };
-      const shoe = {
-        status: 'willReceive',
-        size: faker.random.word(),
-      };
 
-      const dayCareInsert = await request(app)
+      const dayCareInsert = await request(instance)
         .post('/v1/day-cares')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name })
+        .send({ name: faker.internet.userName() })
         .expect(201);
 
-      const classInsert = await request(app)
+      const classInsert = await request(instance)
         .post('/v1/classes')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, day_care: dayCareInsert.body._id })
+        .send({ name: faker.internet.userName(), day_care: dayCareInsert.body._id })
         .expect(201);
 
-      const childInsert = await request(app)
+      childInstance.class = classInsert.body._id;
+
+      const childInsert = await request(instance)
         .post('/v1/children')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name, nickname, sex, age, photo, toy, cloth, shoe, class: classInsert.body._id })
+        .send(childInstance)
         .expect(201);
 
-      const res = await request(app)
+      const res = await request(instance)
         .put(`/v1/children/${childInsert.body._id}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ name: expectName })
@@ -191,15 +112,33 @@ suite('Children', () => {
     });
   });
 
-  suite('#list', () => {
-    test('should return an array list with children', async () => {
-      const res = await request(app)
-        .get('/v1/children')
+  suite('#delete', () => {
+    test('should delete an child', async () => {
+      const childInsert = await request(instance)
+        .post('/v1/children')
         .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+        .send(childInstance)
+        .expect(201);
 
-      res.body.should.be.an('array');
+      const res = await request(instance)
+        .delete(`/v1/children/${childInsert.body._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204);
+
+      res.body
+        .should.be.an('object')
+        .that.is.empty;
+    });
+
+    test('should succeed even when class does not exist', async () => {
+      const res = await request(instance)
+        .delete('/v1/children/598ce31fd826193bbe675726')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204);
+
+      res.body
+        .should.be.an('object')
+        .that.is.empty;
     });
   });
 });
-*/

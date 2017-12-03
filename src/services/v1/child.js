@@ -3,6 +3,7 @@ const _ = require('lodash');
 
 const NotFoundError = require('../../errors/notFound');
 const ChildSchema = require('../../models/v1/child');
+const { transformCriteriaToObject } = require('../utils');
 
 const ChildService = {
 
@@ -15,7 +16,7 @@ const ChildService = {
 
     const { criteria, fields, limit, skip, sort } = query;
 
-    return ChildSchema.find(criteria, fields)
+    return ChildSchema.find(transformCriteriaToObject(criteria), fields)
       .limit(limit)
       .skip(skip)
       .sort(sort)

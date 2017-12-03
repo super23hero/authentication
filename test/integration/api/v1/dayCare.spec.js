@@ -19,6 +19,17 @@ beforeEach(async () => {
 });
 
 suite('Day Cares', () => {
+  suite('#list', () => {
+    test('should return an array list with Day Cares', async () => {
+      const res = await request(instance)
+        .get('/v1/day-cares')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200);
+
+      res.body.data.should.be.an('array');
+    });
+  });
+
   suite('#create', () => {
     test('should create a new day care', async () => {
       const name = faker.internet.userName();
@@ -75,6 +86,28 @@ suite('Day Cares', () => {
     });
   });
 
+  suite('#update', () => {
+    test('should update an day care with some variables', async () => {
+      const expectName = faker.internet.userName();
+      const name = faker.internet.userName();
+
+      const dayCareInsert = await request(instance)
+        .post('/v1/day-cares')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ name })
+        .expect(201);
+
+      const res = await request(instance)
+        .put(`/v1/day-cares/${dayCareInsert.body._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ name: expectName })
+        .expect(200);
+
+      res.body.should.be.an('object');
+      res.body.name.should.be.equal(expectName);
+    });
+  });
+
   suite('#delete', () => {
     test('should delete an day care', async () => {
       const name = faker.internet.userName();
@@ -104,39 +137,6 @@ suite('Day Cares', () => {
       res.body
         .should.be.an('object')
         .that.is.empty;
-    });
-  });
-
-  suite('#update', () => {
-    test('should update an day care with some variables', async () => {
-      const expectName = faker.internet.userName();
-      const name = faker.internet.userName();
-
-      const dayCareInsert = await request(instance)
-        .post('/v1/day-cares')
-        .set('Authorization', `Bearer ${token}`)
-        .send({ name })
-        .expect(201);
-
-      const res = await request(instance)
-        .put(`/v1/day-cares/${dayCareInsert.body._id}`)
-        .set('Authorization', `Bearer ${token}`)
-        .send({ name: expectName })
-        .expect(200);
-
-      res.body.should.be.an('object');
-      res.body.name.should.be.equal(expectName);
-    });
-  });
-
-  suite('#list', () => {
-    test('should return an array list with Day Cares', async () => {
-      const res = await request(instance)
-        .get('/v1/day-cares')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-
-      res.body.data.should.be.an('array');
     });
   });
 });

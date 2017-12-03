@@ -11,8 +11,8 @@ const ChildController = require('../../controllers/v1/child');
 router.use(AuthMiddleware.isAuthenticated);
 
 router.route('/')
-  .get(AuthMiddleware.isAdmin, ChildController.list)
-  .post(AuthMiddleware.isAdmin, ChildController.create);
+  .get(ChildController.list)
+  .post(ChildController.create);
 
 router.route('/:id')
   .get(ChildController.findById)

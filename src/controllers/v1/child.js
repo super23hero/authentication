@@ -1,8 +1,7 @@
-const debug = require('debug')('app:controllers:v1:class');
+const debug = require('debug')('app:controllers:v1:child');
 
 const ChildService = require('../../services/v1/child');
 
-// TODO: Finish documentation
 const ChildController = {
 
   /**
@@ -22,16 +21,8 @@ const ChildController = {
   list: async (req, res, next) => {
     debug('list action');
 
-    const { fields, limit, skip, sort } = req.params;
-
     try {
-      const children = await ChildService.list({
-        criteria: {},
-        fields,
-        limit: Number(limit) || null,
-        skip: Number(skip) || null,
-        sort,
-      });
+      const children = await ChildService.list(req.query);
       res.status(200).send(children);
     } catch (err) {
       next(err);
@@ -54,10 +45,24 @@ const ChildController = {
    *
    * @apiSuccess  {String}  _id             Child id.
    * @apiSuccess  {String}  name            Child name.
+   * @apiSuccess  {String}  nickname        Child nickname.
+   * @apiSuccess  {String}  sex             Child sex.
+   * @apiSuccess  {Number}  age             Child age.
+   * @apiSuccess  {Class}   class           Child class.
+   * @apiSuccess  {String}  photo           Child photo.
+   * @apiSuccess  {Object}  shoe            Child shoe.
+   * @apiSuccess  {String}  shoe.status     Child shoe status.
+   * @apiSuccess  {String}  shoe.size       Child shoe size.
+   * @apiSuccess  {Object}  cloth           Child cloth.
+   * @apiSuccess  {String}  cloth.status    Child cloth status.
+   * @apiSuccess  {String}  cloth.size      Child cloth size.
+   * @apiSuccess  {Object}  toy             Child toy.
+   * @apiSuccess  {String}  toy.status      Child toy status.
+   * @apiSuccess  {String}  toy.wish        Child toy wish.
    * @apiSuccess  {String}  creation_date   Child creation date.
    */
   findById: async (req, res, next) => {
-    debug('find class by id');
+    debug('find child by id');
 
     const { id } = req.params;
 
@@ -85,6 +90,20 @@ const ChildController = {
    *
    * @apiSuccess  {String}  _id             Child id.
    * @apiSuccess  {String}  name            Child name.
+   * @apiSuccess  {String}  nickname        Child nickname.
+   * @apiSuccess  {String}  sex             Child sex.
+   * @apiSuccess  {Number}  age             Child age.
+   * @apiSuccess  {String}  class           Child class id.
+   * @apiSuccess  {String}  photo           Child photo.
+   * @apiSuccess  {Object}  shoe            Child shoe.
+   * @apiSuccess  {String}  shoe.status     Child shoe status.
+   * @apiSuccess  {String}  shoe.size       Child shoe size.
+   * @apiSuccess  {Object}  cloth           Child cloth.
+   * @apiSuccess  {String}  cloth.status    Child cloth status.
+   * @apiSuccess  {String}  cloth.size      Child cloth size.
+   * @apiSuccess  {Object}  toy             Child toy.
+   * @apiSuccess  {String}  toy.status      Child toy status.
+   * @apiSuccess  {String}  toy.wish        Child toy wish.
    * @apiSuccess  {String}  creation_date   Child creation date.
    */
   create: async (req, res, next) => {
