@@ -9,7 +9,7 @@ chai.should();
 
 let instance;
 let token = '';
-let childInstance = {};
+const childInstance = {};
 
 before(async () => {
   instance = await server();
