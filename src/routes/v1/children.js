@@ -16,7 +16,7 @@ router.use(AuthMiddleware.isAuthenticated);
 
 router.route('/:id')
   .get(ChildController.findById)
-  .put(ChildController.update)
-  .delete(ChildController.delete);
+  .put(AuthMiddleware.isAuthenticated, ChildController.update)
+  .delete(AuthMiddleware.isAuthenticated, ChildController.delete);
 
 module.exports = router;
