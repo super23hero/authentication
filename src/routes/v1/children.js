@@ -8,11 +8,11 @@ const router = express.Router();
 const AuthMiddleware = require('../../middlewares/auth');
 const ChildController = require('../../controllers/v1/child');
 
-router.use(AuthMiddleware.isAuthenticated);
-
 router.route('/')
   .get(ChildController.list)
-  .post(ChildController.create);
+  .post(AuthMiddleware.isAuthenticated, ChildController.create);
+
+router.use(AuthMiddleware.isAuthenticated);
 
 router.route('/:id')
   .get(ChildController.findById)
