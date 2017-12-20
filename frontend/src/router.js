@@ -95,8 +95,9 @@ let routes = [
 ];
 
 let router = new VueRouter({
-    routes,
-    linkActiveClass: 'is-active'
+  mode: 'history',
+  routes,
+  linkActiveClass: 'is-active'
 });
 
 router.beforeEach((to, from, next) => {

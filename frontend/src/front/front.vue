@@ -31,6 +31,11 @@
 </script>
 
 <style>
+  :root {
+    --width-portrait-phone: 320px;
+    --width-landscape-phone: 481px;
+
+  }
 
   .main {
     min-height: 100%;

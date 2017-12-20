@@ -1,5 +1,6 @@
 <template>
   <div class="adopt">
+    <h1>Adote uma criança</h1>
     <div class="children-filter">
       <input type="text" class="children-filter__input">
       <select class="children-filter__input" id="children-input-age">
@@ -33,9 +34,6 @@
 </script>
 
 <style>
-  .adopt {
-    padding: 1rem;
-  }
 
   .children-filter {
     display: flex;

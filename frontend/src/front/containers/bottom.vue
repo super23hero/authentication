@@ -15,14 +15,15 @@
     }
 </script>
 
-<style>
+<style scoped>
   .footer {
     width: 100%;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
-    background-color: #ebe9e0;
+    background-color: #FF5A5A;
   }
 
   .footer__container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     width: 75%;
     margin: auto;
   }

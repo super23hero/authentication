@@ -5,7 +5,10 @@
         <h1>Adote o Natal</h1>
       </div>
       <nav class="menu">
-
+        <router-link to="/" v-on:click="makeActive('home')">Home</router-link>
+        <router-link to="/edicoes-anteriores" v-on:click="makeActive('home')">Edições Anteriores</router-link>
+        <router-link to="/criancas" v-on:click="makeActive('home')">Crianças</router-link>
+        <router-link to="/contato" v-on:click="makeActive('home')">Contato</router-link>
       </nav>
       <!--<nav v-bind:class="active" v-on:click.prevent>-->
         <!--<a href="#" class="home" v-on:click="makeActive('home')">Home</a>-->
@@ -26,21 +29,22 @@
     }
 </script>
 
-<style>
+<style scoped>
   .hero {
     width: 100%;
-    padding-bottom: 5rem;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
-    background-color: #1f6d00;
+    padding-top: 3rem;
+    padding-bottom: 8rem;
+    background-color: #FF5A5A;
   }
 
   .header {
     width: 75%;
     margin: auto;
     display: flex;
+    justify-content: space-between;
   }
 
   .header__title {
-
+    color: #fff
   }
 </style>
