@@ -26,14 +26,14 @@
       </div>
 
       <div class="form-group">
-        <label for="password">Senha antiga:</label>
-        <input v-model="form.oldPassword" type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+        <label for="oldPassword">Senha antiga:</label>
+        <input v-model="form.oldPassword" type="password" id="oldPassword" name="oldPassword" class="form-control" placeholder="Digite sua senha">
         <span class="invalid-feedback" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
       </div>
 
       <div class="form-group">
-        <label for="password">Nova senha:</label>
-        <input v-model="form.newPassword" type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+        <label for="newPassword">Nova senha:</label>
+        <input v-model="form.newPassword" type="password" id="newPassword" name="newPassword" class="form-control" placeholder="Digite sua senha">
         <span class="invalid-feedback" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
       </div>
 
@@ -53,13 +53,7 @@
     },
     data() {
       return {
-        form: new Form({
-          name:'',
-          email: '',
-          username: '',
-          oldPassword: '',
-          newPassword: '',
-        }),
+        form: {},
         requestService: new RequestService(),
         userId: this.$route.params.id,
       }
@@ -68,20 +62,17 @@
       this.requestService
         .retrieve('users', this.userId)
         .then(response => {
-        	let userRetrieved = response.data;
-          this.form.name = userRetrieved.name;
-          this.form.email = userRetrieved.email;
-          this.form.username = userRetrieved.username;
+        	this.form =  new Form(response.data);
         });
 
 
     },
     methods: {
       editUser() {
-        let user = this.form;
+        let user = this.form.data();
 
         this.requestService
-          .update('users', user)
+          .update('users', this.userId, user)
           .then(response => {
             console.log('Hell yeah', response)
           })

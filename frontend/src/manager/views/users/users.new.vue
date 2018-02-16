@@ -58,7 +58,7 @@
       },
       methods: {
         createUser() {
-          let user = this.form;
+          let user = this.form.data();
 
           this.requestService
             .create('users', user)
