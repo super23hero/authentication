@@ -5,9 +5,7 @@ class Form {
     constructor(data) {
         this.originalData = data;
 
-        for(let field in data) {
-            this[field] = data[field];
-        }
+        Object.assign(this, data);
 
         this.errors = new Errors();
     }

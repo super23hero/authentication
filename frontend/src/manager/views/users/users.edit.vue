@@ -53,7 +53,7 @@
     },
     data() {
       return {
-        form: {},
+        form: new Form(),
         requestService: new RequestService(),
         userId: this.$route.params.id,
       }
@@ -62,10 +62,8 @@
       this.requestService
         .retrieve('users', this.userId)
         .then(response => {
-        	this.form =  new Form(response.data);
+        	this.form = new Form(response.data);
         });
-
-
     },
     methods: {
       editUser() {

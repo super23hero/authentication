@@ -7,15 +7,6 @@
         </router-link>
       </h2>
 
-      <button id="show-modal" @click="showModal = true">Show Modal</button>
-      <!-- use the modal component, pass in the prop -->
-      <modal v-if="showModal" @close="showModal = false">
-        <!--
-          you can use custom content here to overwrite
-          default content
-        -->
-        <h3 slot="header">custom header</h3>
-      </modal>
 
       <div class="table-responsive">
         <table class="table table-striped">
@@ -32,8 +23,13 @@
             <td>
               <router-link :to="'/admin/users/'+user._id" tag="a">
                 <button type="button" class="btn btn-secondary"><i class="fa fa-pencil"></i></button>
-              </router-link>
-              <button type="button" class="btn btn-outline-danger" @click="deleteUser(user._id)"><i class="fa fa-trash"></i></button>
+              </router-link>btn btn-outline-danger
+              <confirmation-modal
+                v-bind:confirmation-callback="deleteUser(user._id)"
+                message="Deseja realmente deletar o usuário?"
+                button-class="btn btn-outline-danger">
+                <i slot="buttonContent" class="fa fa-trash"></i>
+              </confirmation-modal>
             </td>
           </tr>
           </tbody>
@@ -61,12 +57,12 @@
 
 <script>
     import RequestService from '../../../core/RequestService'
-    import modal from '../../components/modal.vue'
+    import confirmationModal from '../../components/confirmation-modal.vue'
 
     export default {
         name: 'usersList',
         components: {
-          modal
+          'confirmation-modal': confirmationModal,
         },
         data() {
             return {
