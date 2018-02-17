@@ -1,8 +1,6 @@
 <template>
   <div>
-    <button type="button" :class="buttonClass" id="show-modal" @click="showModal = true">
-      <slot name="buttonContent"></slot>
-    </button>
+    <slot name="buttonContent" @click="showModal = true"></slot>
     <!-- use the modal component, pass in the prop -->
 
     <transition v-if="showModal" name="modal">
@@ -14,8 +12,9 @@
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">
                     <slot name="header">
-                      default header
-                    </slot></h5>
+                      Atenção
+                    </slot>
+                  </h5>
                   <button type="button" class="close" @click="cancelOperation()" aria-label="Close">
                     <span>&times;</span>
                   </button>
@@ -54,14 +53,9 @@
         type: String,
         required: true
       },
-      buttonClass: {
-        type: String,
-        required: true
-      },
     },
     data () {
       return {
-        confirmationCallback: this.confirmationCallback,
         showModal: false
       }
     },

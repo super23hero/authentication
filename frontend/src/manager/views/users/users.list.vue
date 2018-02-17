@@ -23,12 +23,13 @@
             <td>
               <router-link :to="'/admin/users/'+user._id" tag="a">
                 <button type="button" class="btn btn-secondary"><i class="fa fa-pencil"></i></button>
-              </router-link>btn btn-outline-danger
+              </router-link>
               <confirmation-modal
-                v-bind:confirmation-callback="deleteUser(user._id)"
-                message="Deseja realmente deletar o usuário?"
-                button-class="btn btn-outline-danger">
-                <i slot="buttonContent" class="fa fa-trash"></i>
+                :confirmation-callback="deleteUser(user._id)"
+                message="Deseja realmente deletar o usuário?">
+                <button slot="buttonContent" type="button" class="btn btn-outline-danger" id="show-modal">
+                  <i class="fa fa-trash"></i>
+                </button>
               </confirmation-modal>
             </td>
           </tr>
