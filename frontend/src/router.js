@@ -110,6 +110,14 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
+axios.interceptors.response.use(response => {
+  return response;
+}, error => {
+  if(error.response.status === 401) {
+    router.push('/admin/login');
+  }
 
+  return Promise.reject(error);
+});
 
 export default router;

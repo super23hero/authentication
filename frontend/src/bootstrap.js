@@ -18,10 +18,3 @@ window.API_URL = 'http://localhost:3000/v1/';
 window.axios = axiosLib.create({
   baseURL: API_URL
 });
-
-window.axios.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  // Do something with response error
-  //return Promise.reject(error);
-});
