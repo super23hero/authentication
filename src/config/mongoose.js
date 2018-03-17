@@ -13,7 +13,7 @@ mongoose.Promise = Promise;
 mongoose.set('debug', env.NODE_ENV === 'development');
 
 module.exports = new Promise((resolve, reject) => {
-  mongoose.connect(url, { reconnectTries: Number.MAX_VALUE, useMongoClient: true });
+  mongoose.connect(url, { reconnectTries: Number.MAX_VALUE });
 
   mongoose.connection.on('connected', () => logger.info(`Mongoose default connection open to ${url}`));
 
