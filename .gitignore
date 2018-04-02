@@ -62,3 +62,19 @@ typings/
 # Intellij
 *.iml
 .idea
+
+.DS_Store
+node_modules/
+/client/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/client/test/unit/coverage/
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
