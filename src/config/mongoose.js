@@ -27,7 +27,7 @@ module.exports = new Promise((resolve, reject) => {
     if (count > 0) return resolve();
     debug('creating "admin" user since there\'s no users in the database');
 
-    await new User({ name: 'Administrator', username: 'involves', password: 'admin', email: 'admin@admin.com', isAdmin: true }).save();
+    await new User({ name: 'Administrator', username: 'admin', password: 'admin', email: 'admin@admin.com', isAdmin: true }).save();
     resolve();
   });
 
